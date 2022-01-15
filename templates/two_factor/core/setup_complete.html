@@ -1,0 +1,37 @@
+{% extends "two_factor/_base_focus.html" %}
+{% load i18n %}
+
+{% load static %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/login-signup.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="log-sign-full-center">
+  <div id="log-sign-mutable-card">
+    <h1 class="log-sign-func-header">{% block title %}{% trans "Enable Two-Factor Authentication" %}{% endblock %}</h1>
+
+    <p class="log-sign-2fa-auth" style="margin-bottom:40px;">{% blocktrans %}Congratulations, you've successfully enabled two-factor
+        authentication.{% endblocktrans %}</p>
+  </div>
+</div>
+<!-- can probably delete this -->
+  {% if not phone_methods %}
+    <p><a href="{% url 'two_factor:profile' %}"
+        class="btn btn-block btn-default">{% trans "Back to Profile" %}</a></p>
+  {% else %}
+    <a href="{% url 'two_factor:profile' %}"
+        class="pull-right btn btn-link">{% trans "Back to Profile" %}</a>
+    <p><a href="{% url 'two_factor:phone_create' %}"
+        class="btn btn-success">{% trans "Add Phone Number" %}</a></p>
+  {% endif %}
+<script>
+  window.onload = function(){
+    setTimeout(function(){ 
+      window.location.href = "/account/manage/";  
+    }, 3000);
+  };
+
+</script>
+{% endblock %}
