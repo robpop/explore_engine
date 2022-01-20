@@ -1,0 +1,205 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Explore - Unsift{% endblock %}
+{% block description %}Explore thousands of sites at once and save your favorites to your library.{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/explore.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <!--
+
+    when sites are selected and refresh is clicked:
+
+    put selected sites at top of listing with the new site listings below them
+
+    automatically scrolls down to new listings
+
+    -->
+    <div id="explore-section">
+      <div id="explore-side-bar">
+        <!-- side bar -->
+        <a class="side-bar-option" id="side-bar-shuffle-categories" href="/explore/" title="Browse all sites">All Sites</a>
+
+        <p id="side-bar-categories-header">All Tags</p>
+
+
+        <div id="side-bar-categories-hub">
+          <a class='side-bar-category-item ripple explore-category-dummy animated fadeIn fasterer' href='#'></a>
+        </div>
+
+        <div id="explore-compact-footer">
+          <a href="#" title="Privacy Policy">Privacy</a>
+          <a href="#" title="Terms and Conditions">Terms</a>
+          <a href="{% url 'publish:claims' %}" title="Claim a site">Claim a site</a>
+          <a href="{% url 'core:acknowledgements' %}" title="View acknowledgements">Acknowledgements</a>
+          <a href="#" title="Affiliate Disclosure">Affiliate Disclosure</a>
+          <a href="#" title="DMCA">DMCA</a>
+          <a href="#" title="Cookies">Cookies</a>
+          <p>&copy; 2018-{% now 'Y' %} Unsift LLC</p>
+        </div>
+      </div>
+
+
+      <div class="explore-user-library-folders-series animated">
+        <h2 class="animated">Your Library</h2>
+        <div class="explore-user-library-folders animated">
+          <ul>
+            <li id="exp_usr_libdsh" class="exp_crd_clk exp-user-lib-folder__inst" data-fid="">Library Dashboard</li>
+            <li class="exp_crd_clk exp-user-lib-folder__dummy" data-fid="">Library Dashboard</li>
+          </ul>          
+        </div>
+        <div class="explore-user-library-options animated">
+          <button class="exp_crd_clk explore-save--sitetolib explore-user-library-option_save_disabled">Save</button>
+          <button class="exp_crd_clk ripple">Cancel</button>
+        </div>
+        <div class="addtolib-progress-loader animated"><div class="addtolib-progress-loader-outer"><div class="addtolib-progress-loader-inner"></div></div></div>
+        <div class="explore-user-library-save-success animated">
+          <p>Site added to your library!</p>
+          <svg style="width:48px;height:48px" viewBox="0 0 24 24">
+              <path fill="#3C6CC4" d="M20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4C12.76,4 13.5,4.11 14.2,4.31L15.77,2.74C14.61,2.26 13.34,2 12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12M7.91,10.08L6.5,11.5L11,16L21,6L19.59,4.58L11,13.17L7.91,10.08Z" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="explore-user-feedback-series animated">
+        <h2 class="animated">Tell <span id="explore-inst-feedback-name"></span> what you think</h2>
+        
+        <div id="explore-user-feedback-subjectrating">
+          <input id="eufsr-subject" class="exp_crd_clk animated" placeholder="Subject (4-50 characters)" type="text" required minlength="4" maxlength="50">
+          <div id="eufsr-wrap" class="exp_crd_clk">
+            <div>&#9734;</div><div>&#9734;</div><div>&#9734;</div><div>&#9734;</div><div>&#9734;</div>
+          </div>
+        </div>
+        
+        <textarea id="eufsr-prose" class="exp_crd_clk animated" placeholder="Your feedback (8-250 characters)" required minlength="8" maxlength="250"></textarea>
+        <div class="explore-user-feedback-options animated">
+          <button id="eufsr-submit" class="exp_crd_clk ripple l--a-f-f_disable">Send</button>
+          <button id="eufsr-cancel" class="exp_crd_clk ripple">Cancel</button>
+        </div>
+      </div>
+    
+      <div id="explore-main-feed" class="animated faster">
+        <!-- main explore region -->
+        <div class="animated fasterer -mobile mlsfepev" id="mobile-library-section-focus">
+          <button class="ripple mobile-library-exp-cls animated fasterer">
+            <svg viewBox="0 0 24 24">
+                <path fill="#fff" d="M14,20H10V11L6.5,14.5L4.08,12.08L12,4.16L19.92,12.08L17.5,14.5L14,11V20Z" />
+            </svg>
+          </button>
+          <div class="mobile-library-exp-info animated fasterer">
+            <!-- expanded info goes here -->
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Site logo">
+            <p class="mobile-library-sitename"></p>
+            <p class="mobile-library-sitedesc"></p>
+            <div class="mobile-library-exp-info-btn-series">
+              <a class="ripple explore-site--open__mobile" title="Open site" href="#" target="_blank" rel="noopener noreferrer">Open</a>
+              {% if user.is_authenticated %}
+              <button class="ripple explore-add--library__mobile">Add to Library</button>
+              {% else %}
+              <a href="{% url 'two_factor:login' %}" title="Sign in" class="ripple explore-add--library__mobile">Add to Library</a>
+              {% endif %}
+            </div>
+            {% if user.is_authenticated %}
+            <div class="mobile-library-site-feedback">
+              <button id="mobile-card-feedback_btn" class="ripple">Give Feedback</button>
+            </div>
+            {% endif %}
+            <div class="mobile-securelink-display"></div>
+          </div>
+          <div class="mobile-card-givefeedback animated fasterer">
+            <h2>null</h2>
+            <input id="mobile-card-feedbacksubject" placeholder="Subject (4-50 characters)" type="text" required="" minlength="4" maxlength="50">
+            <div class="mobile-card-rating_wrapper">
+              <div>&#9734;</div><div>&#9734;</div><div>&#9734;</div><div>&#9734;</div><div>&#9734;</div>
+            </div>
+            <textarea id="mobile-card-feedbackcontent" placeholder="Your feedback (8-250 characters)" required="" minlength="8" maxlength="250"></textarea>
+            <div class="mobile-card-optbtn_wrapper">
+              <button id="mobile-card-givefeedback_send" type="button" class="ripple l--a-f-f_disable">Send</button>
+              <button type="button" id="mobile-card-givefeedback_cancel" class="ripple">Cancel</button>
+            </div>
+          </div>
+          <div class="mobile-card-addtolibrary animated fasterer">
+            <p>Your Library</p>
+            <p>Select a folder below</p>
+            <ul id="mobile-card-library_folders">
+              <li id="m__exp_usr_libdsh" data-fid class="m__exp_usr_libdsh">Library Dashboard</li>
+              <li class="m__exp-user-lib-folder__dummy"></li>
+            </ul>
+            <div class="mobile-card-optbtn_wrapper">
+              <button id="mobile-card-addtolibrary_save" type="button" class="ripple l--a-f-f_disable">Save</button>
+              <button type="button" id="mobile-card-addtolibrary_cancel" class="ripple">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-library-section mobile-library-section-dummy -mobile lazy" data-loader="sitecard_loader">
+          <div class="mobile-library-preview">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="lazy" data-src="" alt="Site logo">
+          </div>
+          <div class="mobile-library-info">
+            <p></p>
+          </div>
+          <p class="mmeta mmeta__title"></p>
+          <p class="mmeta mmeta__desc"></p>
+          <p class="mmeta mmeta__link"></p>
+          <div class="mmeta mmeta__securelink">
+            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12,17C10.89,17 10,16.1 10,15C10,13.89 10.89,13 12,13A2,2 0 0,1 14,15A2,2 0 0,1 12,17M18,20V10H6V20H18M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V10C4,8.89 4.89,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z" />
+            </svg>
+            <p></p>
+          </div>
+          <p class="mmeta mmeta__link_title"></p>
+        </div>
+
+        <div class="library-section library-section-dummy explore-listing-section lazy -non-mobile" data-loader="sitecard_loader">
+          <div id="explore-primary-container" class="explore-atlib explore-primary-container animated">
+            <div class="library-folder">
+              <div class="library-folder-preview">
+                <!-- logo image -->
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="lazy" data-src="" alt="Site logo" />
+              </div>
+            </div>
+            <p class="library-folder-name"></p>
+          </div>
+          <div class="explore-expanded-info animated fadeInUp faster explore-atlib">
+            <p class="explore-expanded-info-desc"></p>
+            <div class="explore-security-show-link animated fadeIn fasterer">
+              <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M12,17C10.89,17 10,16.1 10,15C10,13.89 10.89,13 12,13A2,2 0 0,1 14,15A2,2 0 0,1 12,17M18,20V10H6V20H18M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V10C4,8.89 4.89,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z" />
+              </svg>
+              <p></p>
+            </div>
+            <div class="explore-expanded-info-actions">
+              <a class="ripple exp_crd_clk explore-site--open" title="" href="" target="_blank" rel="noopener noreferrer" style="margin-right:5px">Open</a>
+              {% if user.is_authenticated %}
+              <button class="ripple exp_crd_clk explore-add--library">Add to Library</button>
+              {% else %}
+              <a href="{% url 'two_factor:login' %}" title="Sign in" class="ripple exp_crd_clk explore-add--library">Add to Library</a>
+              {% endif %}
+            </div>
+            {% if user.is_authenticated %}
+            <div class="library-site-feedback">
+              <button id="library-site-feedback-btn" class="exp_crd_clk">Give Feedback</button>
+            </div>
+            {% endif %}
+          </div>
+        </div>  
+      </div>
+    </div>
+{% endblock %}
+
+{% block jsfiles %}
+<script src="{% static 'js/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+<script src="{% static 'js/jquery.visible.min.js' %}"></script>
+<script src="{% static 'js/svg.js' %}"></script>
+<script src="{% static 'js/dynamic-logo.js' %}"></script>
+<script src="{% static 'js/toggle-nav-visibility.js' %}"></script>
+<script src="{% static 'js/api-explore.js' %}"></script>
+<script src="{% static 'js/explore-fab.js' %}"></script>
+<script src="{% static 'js/explore-side-bar.js' %}"></script>
+<script src="{% static 'js/mobile-explore.js' %}"></script>
+{% endblock %}
