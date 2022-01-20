@@ -1,0 +1,77 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Unsift - Sign-Up/Login{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/login-signup.css' %}">
+{% endblock %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+    <p>You're currently logged in as {{ user.get_username }}. If you would like to sign up as another user, please <a href="{% url 'account:logout' %}">logout</a> first.</p>
+  {% else %}
+    <div class="log-sign-full-center">
+      <div id="log-sign-mutable-card">
+        <h1 class="log-sign-func-header">Create your Unsift Account</h1>
+
+        <!--
+        sign up:
+        email, username, password fields, optional first name and last name, and checkboxes for the terms of service.
+        -->
+
+        <div class="log-sign-func-fields">
+          <form action="{% url 'account:signup' %}" method="POST" id="signup_form">
+            <div class="sign-fields">
+              {% csrf_token %}
+              <div class="sign-opt-half-wrap">
+                {{ signup_form.email }}
+                {{ signup_form.username }}
+              </div>
+              {{ signup_form.password1 }}
+              {{ signup_form.password2 }}
+              <!--<div class="sign-opt-half-wrap">
+                {{ signup_form.first_name }}
+                {{ signup_form.last_name }}
+              </div>-->
+              <br/>
+              {{ signup_form.age }}<label for="sign-opt-age-pp">I am 13 years old or older</label><br/>
+              {{ signup_form.agreement }}<label for="sign-opt-tos-pp">I have read and agree to the <a href="#" title="Unsift Privacy Policy">Privacy Policy</a> and the <a href="#" title="Unsift Terms and Conditions">Terms and Conditions</a> agreement.</label><br/>
+              <div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001"></div>
+              <button type="submit" id="sign-submit-card" class="ripple l--a-f-f_disable">Sign Up</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div id="signup-validate-console">
+      <p id="signup-validate-constraint" class="animated fasterer"></p>
+    </div>
+    {% if signup_form.errors %}
+      {% if signup_form.email.errors %}
+        <p class="notification-err">{{ signup_form.email.errors.as_text|cut:'* ' }}</p>
+      {% endif %}
+      {% if signup_form.username.errors %}
+        <p class="notification-err">{{ signup_form.username.errors.as_text|cut:'* ' }}</p>
+      {% endif %}
+      {% if signup_form.password1.errors %}
+        <p class="notification-err">{{ signup_form.password1.errors.as_text|cut:'* ' }}</p>
+      {% endif %}
+      {% if signup_form.password2.errors %}
+        <p class="notification-err">{{ signup_form.password2.errors.as_text|cut:'* ' }}</p>
+      {% endif %}
+      {% if signup_form.agreement.errors %}
+        <p class="notification-err">{{ signup_form.agreement.errors.as_text|cut:'* ' }}</p>
+      {% endif %}
+      {% if signup_form.non_field_errors %}
+        <p class="notification-err">{{ signup_form.non_field_errors.as_text|cut:'* ' }}</p>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+{% endblock %}
+
+{% block jsfiles %}
+    <script src="https://hcaptcha.com/1/api.js" async defer></script>
+    <script src="{% static 'js/signup-validate.js' %}"></script>
+    <script src="{% static 'js/captcha-err.js' %}"></script>
+{% endblock %}

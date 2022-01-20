@@ -1,0 +1,89 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Support - Unsift{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/support.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<h1 id="support-header">Contact Support</h1>
+<div id="support-open-ticket-wrapper">
+  <p>Open a new ticket to get in touch with Unsift support below</p>
+  <button class="ripple">Open a ticket</button>
+</div>
+<div id="support-view-ticket-wrapper">
+  <button>Open tickets</button>
+  <p>|</p>
+  <button>Closed tickets</button>
+</div>
+<table id="support-list-ticket-wrapper__open" class="support-list-ticket-wrapper">
+  <tr class="support-list-headers">
+    <th>Created</th>
+    <th>Subject</th>
+    <th>Message</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  <tr class="support-ticket-dummy__open lazy" data-loader="sitecard_loader">
+    <td class="st_timestamp _stf"></td>
+    <td class="st_subject _stf"></td>
+    <td class="st_message _stf"></td>
+    <td class="st_status _stf"></td>
+    <td class="st_close"><button type="button" class="st_closeticket _stf">Close Ticket</button></td>
+  </tr>
+</table>
+<p id="support-noopen-tickets" class="support-no-tickets">No current tickets found</p>
+<table id="support-list-ticket-wrapper__closed" class="support-list-ticket-wrapper">
+  <tr class="support-list-headers">
+    <th>Created</th>
+    <th>Subject</th>
+    <th>Message</th>
+    <th>Status</th>
+  </tr>
+  <tr class="support-ticket-dummy__closed lazy" data-loader="sitecard_loader">
+    <td class="st_timestamp _stf"></td>
+    <td class="st_subject _stf"></td>
+    <td class="st_message _stf"></td>
+    <td class="st_status _stf"></td>
+  </tr>
+</table>
+<p id="support-noclosed-tickets" class="support-no-tickets">No closed tickets found</p>
+
+<div id="support-dialog-backdrop" class="animated faster fadeIn"></div>
+<div id="support-dialog" class="animated faster fadeInUp">
+  <h2>Open a ticket</h2>
+  <label>
+    <input maxlength="64" type="text" placeholder="Subject">
+  </label>
+  <textarea maxlength="1024" placeholder="Please describe your issue..."></textarea>
+  <div id="support-dialog-opt">
+    <button type="button" class="l--a-f-f_disable ripple">Submit</button>
+    <button type="button" class="ripple">Cancel</button>
+  </div>
+</div>
+
+<div id="support-commentlog" class="animated faster fadeInUp">
+  <p id="support--empty-messages" class="animated fadeIn faster">No messages found</p>
+  <ul id="support-commentlog-message_wrapper">
+    <li class="support-comment-item-dummy animated faster bounceIn lazy" data-loader="sitecard_loader">
+      <p></p>
+      <span></span>
+    </li>
+  </ul>
+  <div id="support-commentlog-send_wrapper">
+    <textarea maxlength="1024" id="support-commentlog-send_message" placeholder="Message Unsift staff..." ></textarea>
+    <div id="support-commentlog-options_wrapper">
+      <button type="button" class="l--a-f-f_disable">Send</button>
+      <button type="button">Cancel</button>
+    </div>
+  </div>
+  <button type="button" id="support-commentlog-closed_close">Close</button>
+</div>
+{% endblock %}
+
+{% block jsfiles %}
+<script src="{% static 'js/support.js' %}"></script>
+{% endblock %}

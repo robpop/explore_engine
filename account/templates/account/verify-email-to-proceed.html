@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Unsift - Verify Email{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/login-signup.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="log-sign-full-center">
+  <div id="log-sign-mutable-card">
+    <p class="log-sign-2fa-auth" style="margin-top:15px">You must verify your email address before proceeding</p>
+    <a class="log-sign-2fa-auth minor_pages_link" href="{% url 'account:manage' %}" style="margin-bottom:10px" title="Account Management">Account Management</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block jsfiles %}
+{% endblock %}

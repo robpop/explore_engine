@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Unsift - Revert Email Change{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/login-signup.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="log-sign-full-center">
+  <div id="log-sign-mutable-card">
+    <p class="log-sign-2fa-auth" style="margin-top:15px">Your email has been successfully reverted back to {{ email }}.</p>
+    <p class="log-sign-2fa-auth" style="margin-bottom:10px">For security reasons, we urge you to please <a href="{% url 'password_reset' %}" style="margin:0;padding:8px 0;" class="minor_pages_link" title="Reset your password">reset your password</a> now.</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block jsfiles %}
+{% endblock %}

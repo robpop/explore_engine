@@ -1,0 +1,158 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load core_filters %}
+
+{% block title %}Manage Account - Unsift{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/manage-account.css' %}">
+<link rel="stylesheet" href="{% static 'css/jquery-confirm.min.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<h1 class="manage-account-header">Manage Account</h1>
+<div id="manage-jumbo-form">
+  <ul>
+    <li>
+      <p class="mjf-fl">Username</p>
+      <svg class="mjf-fr mjf-ei mjf--opt mpl__u-h" viewBox="0 0 24 24">
+          <path fill="#3C6CC4" d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
+      </svg>
+      <p id="mjf-fr__curruname" class="mjf-fr mjf-bt mpl__u-h"></p>
+      <div id="mjf-form--u__wrap" class="mjf-form mpl__u-h">
+        <p>Change your username</p>
+        <p><span class="__u__r0">4+ characters</span> / <span class="__u__r1">30 character maximum</span><span class="__u__r2">no special characters (except dots, dashes, and underscores)</span></p>
+        <p class="mjf-form--u_chrcnt">&zwnj;</p>
+        <input type="text" placeholder="New username" id="mjf-form--u_input" pattern="^[\w.-]{4,30}$" maxlength="30">
+        <div id="mjf-form--u--btnwrap">
+          <input type="button" value="Submit" id="mjf-form--u_submit" class="ripple l--a-f-f_disable">
+          <input type="button" value="Cancel" id="mjf-form--u_cancel" class="ripple">
+        </div>
+      </div>
+      <div class="manageacnt-progress-loader mpl__u animated -non-mobile"><div class="manageacnt-progress-loader-outer"><div class="manageacnt-progress-loader-inner"></div></div></div>
+    </li>
+
+    <li>
+      <p class="mjf-fl mjf-left">Password</p>
+      <svg class="mjf-fr mjf-ei mjf--opt mpl__p-h" viewBox="0 0 24 24">
+          <path fill="#3C6CC4" d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
+      </svg>
+      <p class="mjf-fr mjf-bt mpl__p-h">&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;</p>
+      <div id="mjf-form--p__wrap" class="mjf-form mpl__p-h">
+        <p>Change your password</p>
+        <p><span class="__p__r0">8+ characters</span> / <span class="__p__r1">1+ lowercase and uppercase characters</span> / <span class="__p__r2">1+ special characters</span></p>
+        <p class="mjf-form--p_match">&zwnj;</p>
+        <input type="password" placeholder="Old password" id="mjf-form--p_old" maxlength="128">
+        <input type="password" placeholder="New password" id="mjf-form--p_new" maxlength="128">
+        <input type="password" placeholder="Retype password" id="mjf-form--p_newre" maxlength="128">
+        <div id="mjf-form--p--btnwrap">
+          <input type="button" value="Submit" id="mjf-form--p_submit" class="ripple l--a-f-f_disable">
+          <input type="button" value="Cancel" id="mjf-form--p_cancel" class="ripple">
+        </div>
+      </div>
+      <div class="manageacnt-progress-loader mpl__p animated -non-mobile"><div class="manageacnt-progress-loader-outer"><div class="manageacnt-progress-loader-inner"></div></div></div>
+    </li>
+    
+    <li>
+      <p class="mjf-fl mjf-left">Email</p>
+      <svg class="mjf-fr mjf-ei mjf--opt mpl__e-h" viewBox="0 0 24 24">
+          <path fill="#3C6CC4" d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
+      </svg>
+      <p id="mjf-fr__curremail" class="mjf-fr mjf-bt mpl__e-h"></p>
+      <div id="mjf-form--e__wrap" class="mjf-form mpl__e-h">
+        <p>Change your email</p>
+        <p>You will need to verify your new email address</p>
+        <input type="email" placeholder="New email" id="mjf-form--e_new" maxlength="50">
+        <div id="mjf-form--e--btnwrap">
+          <input type="button" value="Submit" id="mjf-form--e_submit" class="ripple l--a-f-f_disable">
+          <input type="button" value="Cancel" id="mjf-form--e_cancel" class="ripple">
+        </div>
+      </div>
+      <div class="manageacnt-progress-loader mpl__e animated -non-mobile"><div class="manageacnt-progress-loader-outer"><div class="manageacnt-progress-loader-inner"></div></div></div>
+    </li>
+    
+    {% if user|isPublisher %}
+    <li>
+      <p class="mjf-fl mjf-left">Payment methods</p>
+      <!--
+        
+        view payment methods
+        set default payment method
+        add new payment method (outbound to /publish/payment/)
+        
+      -->
+      <button type="button" id="mjf-fr__managepayment" class="mjf--opt">Manage</button>
+      <div id="mjf-form--pm__wrap" class="mjf-form">
+        <p id="manage__primarypayment">Primary payment method</p>
+        <p id="manage__primarypayment_wrap"><span class="manage__primarypayment_msg">None set</span><span class="manage__primarypayment_crd"></span><span class="manage__primarypayment_exp"></span></p>
+        <p id="manage__otherpayments" class="manage__otherpayments">Other payment methods</p>
+        <ul id="manage__otherpayments_list" class="manage__otherpayments">
+          <li class="manage__altpayment-dummy"><span></span><button type="button" class="manage__deletealt">remove</button><button type="button" class="manage__changeprimary">set primary</button></li>
+        </ul>
+        <div id="manage__addpayment__opt">
+          <a id="manage__addpayment" href="{% url 'publish:payment' %}" title="Add a payment method">Add payment method</a>
+          <input type="button" value="Cancel" id="manage__addpayment_cancel" class="ripple">
+        </div>
+      </div>
+    </li>
+    {% endif %}
+    
+    <li>
+      <p class="mjf-fl mjf-left">2FA</p>
+      <div class="mjf-2fa__wrap">
+        <a id="mjf-fr__curr2fa" href="" title="" class="mjf-fr mjf-bt"></a> 
+        <!--<p class="-mobile">&rarr;</p>--> 
+      </div>
+    </li>
+    
+    <li>
+      <p class="mjf-fl mjf-left">View NSFW sites</p>
+      <div class="mjf-fr__nsfw">
+        <label class="manage-nsfw-switch">
+          <input type="checkbox">
+          <span class="slider slider-disabled round"></span>
+        </label>
+      </div>
+    </li>
+    
+    <li id="mjf__email_verification">
+      <p class="mjf-fl">Email Verification</p>
+      <button id="mjf-fr__resendverification" class="mjf-fr">(action)</button>
+    </li>
+    
+    <li>
+      <p class="mjf-fl mjf-left">Sign out all devices</p>
+      <button id="mjf-fr__signoutall">Sign out</button>
+    </li>
+    
+        
+    <li id="mjf__delete">
+      <p class="mjf-fl mjf-left">Delete account</p>
+      <svg class="mjf-fr mjf-da mjf--opt" viewBox="0 0 24 24">
+          <path fill="#c44848" d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />
+      </svg>
+      <div id="mjf-form--d__wrap" class="mjf-form">
+        <p>Permanently delete your account</p>
+        <p><span>be careful</span> - this action will irreversibly erase your Unsift account and any information associated with it</p>
+        <input type="password" placeholder="Your password" id="mjf-form--d_pass" maxlength="128">
+        
+        <label for="mjf-form--2fa_pass" id="mjf-form--2fa_prompt">Enter the 6-digit code generated by your authenticator app</label>
+        <input type="number" id="mjf-form--2fa_pass" placeholder="6-digit code" max="999999">
+        
+        <div id="mjf-form--d--btnwrap">
+          <input type="button" value="Delete" id="mjf-form--d_submit" class="ripple l--a-f-f_disable">
+          <input type="button" value="Cancel" id="mjf-form--d_cancel" class="ripple">
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+{% endblock %}
+
+{% block jsfiles %}
+    <script src="{% static 'js/manage-logic.js' %}"></script>
+    <script src="{% static 'js/api-manage.js' %}"></script>
+    <script src="{% static 'js/jquery-confirm.min.js' %}"></script>
+{% endblock %}
