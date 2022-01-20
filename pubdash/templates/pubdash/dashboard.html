@@ -1,0 +1,73 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Publisher Dashboard - Unsift{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/pubdash.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div id="publisher-dash-upper-region" class="-non-mobile">
+  <h1>Select one of your sites to manage</h1>
+</div>
+
+<div class="subscription-progress-loader animated -non-mobile"><div class="subscription-progress-loader-outer"><div class="subscription-progress-loader-inner"></div></div></div>
+
+<div id="pubdash-total-sitesubscriptions" class="-non-mobile">
+  <div>
+    <h2>Subscription</h2>
+    <p>Your total monthly site subscription. Only includes active subscriptions.</p>
+  </div>
+  
+  <div>
+    <p id="pubdash-total__subscription-sites"><span></span><span></span></p>
+    <p id="pubdash-total__subscription-card"><span class="pubdash__primarypayment_msg"></span><span class="pubdash__primarypayment_crd"></span><span class="pubdash__primarypayment_exp"></span></p>
+    <p id="pubdash-total__subscription-due">Your next bill is for $<span class="pubdash-total__subscription-due_amt"></span> + tax on <span class="pubdash-total__subscription-due_date"></span></p>
+    <a href="{% url 'account:manage' %}" title="Manage your account">Manage payment methods</a>
+  </div>
+</div>
+
+<div id="pubdash-items--sites" class="-non-mobile">
+
+  <div id="pubdash-add-new-site" class="library-section -non-mobile" style="display:flex">
+    <a href="/publish/" title="Add a new site" class="pubdash-slct__a"></a>
+    <div class="explore-atlib animated">
+      <div class="pubdash-add-new-site_icn">
+        <div class="pubdash-new-site-plus">
+          <svg viewBox="0 0 24 24">
+              <path fill="#f9fafd" stroke="#3C6CC4" stroke-width="0.25" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+          </svg>
+        </div>
+      </div>
+      <p class="pubdash-add-site-prompt">Add a new site</p>
+    </div>
+  </div>
+
+  <div class="library-section library-section-dummy explore-listing-section -non-mobile" style="display:flex;">
+    <a href="#" title="null" class="pubdash-slct__a"></a>
+    <div class="explore-atlib explore-primary-container animated">
+      <div class="library-folder">
+        <div class="library-folder-preview">
+          <!-- logo image -->
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="lazy" data-src="" alt="Site logo" />
+        </div>
+      </div>
+      <p class="library-folder-name"></p>
+    </div>
+  </div>
+</div>
+
+<div class="-mobile">
+  <p id="mobile--wall">This page requires a larger screen</p>
+  <p id="mobile--wall_back"><a href="{% url 'explore:explore' %}" title="Explore new sites">Tap here</a>if not redirected back</p>
+</div>
+{% endblock %}
+
+{% block jsfiles %}
+    <script src="{% static 'js/svg.js' %}"></script>
+    <script src="{% static 'js/dynamic-logo.js' %}"></script>
+    <script src="{% static 'js/publisher-logic.js' %}"></script>
+    <script src="{% static 'js/mobile-wall.js' %}"></script>
+{% endblock %}

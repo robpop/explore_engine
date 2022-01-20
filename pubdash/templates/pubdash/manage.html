@@ -1,0 +1,313 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Manage Site - {{ site.name }} - Unsift{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/onboard.css' %}">
+<link rel="stylesheet" href="{% static 'css/pubdash.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div id="pub-buffer-space"></div>
+
+<div id="pubdash-verified-status" class="-non-mobile">
+  <p class="pubdash-status_box animated fadeInUp faster">Site ownership: <span id="pubdash-verified-status_cnt"></span></p>
+  <p class="pubdash-status_box animated fadeInUp faster">Subscription: <span id="pubdash-active-status_cnt"></span></p> 
+  <p class="pubdash-status_box animated fadeInUp faster" id="pubdash-site-change_status">Site changes: <span id="pubdash-changes-status_cnt"></span></p> 
+</div>
+
+<div id="pubdash-verifysite" class="-non-mobile">
+  <div id="pubdash-verifysite_form">
+    <p style="margin:0">Verify ownership of your site (<span id="pubdash-verifysite_method"></span>)</p>
+    <p id="pubdash-verify-method__meta-input" class="ripple-blue pubdash-verify__copy">&#60;meta name=&#34;unsift-site-verification&#34; content=&#34;<span></span>&#34;&#62;</p>
+    <p id="pubdash-verify-method__dns-input" class="ripple-blue pubdash-verify__copy">unsift-site-verification=<span></span></p>
+    
+    <p id="pubdash-verifysite_instructions"></p>
+    <div id="pubdash-verifysite__wrapper">
+      <button id="pubdash-verifysite_verify" type="button" class="ripple" style="margin:7px;">Verify</button>
+      <button id="pubdash-toggle-verification_method" type="button">null</button>
+    </div>
+    <div class="verifysite-progress-loader animated"><div class="addtolib-progress-loader-outer"><div class="addtolib-progress-loader-inner"></div></div></div>
+  </div>
+</div>
+
+<div id="pubdash-dashboard" class="-non-mobile">
+  <h1 class="pub-analytics-header">Site Analytics</h1>
+  <p class="pub-analytics-subheader" id="pas_ffed">Gain insights into {{ site.name }}'s performance</p>
+
+  <div id="pub-analytics-overall-daily-counters">
+    <!--<div class="pa-daily-counters">
+    </div>-->
+    
+    <div id="pub-analytics-metrics-left">
+      <div id="pubdash-metric-chart"></div>
+      
+      <div class="pub-userfeedback-sec">
+        <div class="pub-userfeedback-series">
+          <div id="pub-userfeedback-mutable-card">
+            <h1 class="pub-userfeedback-header">User Feedback</h1>
+            <p class="pub-userfeedback-subheader">Review and save feedback from your users</p>
+            <div id="pub-userfeedback_average-rating">
+              <div id="pub-userfeedback_average-rating-display">
+                <div>&#9734;</div><div>&#9734;</div><div>&#9734;</div><div>&#9734;</div><div>&#9734;</div>
+              </div>
+              <p>avg</p>
+            </div>
+            <div class="pub-userfeedback-toggle-func">
+              <button id="pub-userfeedback-toggle-func-sign" class="pub-userfeedback-toggle-func-fcs">New Feedback</button>
+              <button id="pub-userfeedback-toggle-func-log" class="pub-userfeedback-toggle-func-nfcs">Saved Feedback</button>
+            </div>
+            
+            <p class="pub-uf-nf-msg">Unsaved feedback is automatically removed after two weeks</p>
+            <p id="pub-userfeedback-nofeedback">No user feedback available</p>
+            
+            <ul class="pub-uf-nf">
+              <li class="pubdash-feedback-dummy lazy" data-loader="sitecard_loader">
+                <div class="pubdash-feedback-header">
+                  <p>subject</p>
+                  <div class="pubdash-feedback-rating-display">
+                    <div>&#9734;</div><div>&#9734;</div><div>&#9734;</div><div>&#9734;</div><div>&#9734;</div>
+                  </div>
+                </div>
+                <p class="pubdash-feedback-timestamp">yyyy-mm-dd</p>
+                <p class="pubdash-feedback-message">feedback</p>
+                <div class="pubdash-feedback-options">
+                  <svg class="pubdash-feedback__save" viewBox="0 0 24 24">
+                      <path fill="#3C6CC4" d="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z" />
+                  </svg>
+                </div>
+              </li>
+            </ul>
+
+            <p id="pub-userfeedback-nofeedback-saved">No saved user feedback</p>
+
+            <ul class="pub-uf-sf">
+              <li class="pubdash-feedback-saved-dummy lazy" data-loader="sitecard_loader">
+                <div class="pubdash-feedback-header">
+                  <p>subject</p>
+                  <div class="pubdash-feedback-rating-display">
+                    <div>&#9734;</div><div>&#9734;</div><div>&#9734;</div><div>&#9734;</div><div>&#9734;</div>
+                  </div>
+                </div>
+                <p class="pubdash-feedback-timestamp">yyyy-mm-dd</p>
+                <p class="pubdash-feedback-message">feedback</p>
+                <div class="pubdash-feedback-options">
+                  <svg class="pubdash-feedback__delete" viewBox="0 0 24 24">
+                      <path fill="#C43C3C" d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />
+                  </svg>
+                </div>
+              </li>
+              
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="pub-analytics-metrics-right">
+      <div id="pub-metrics-key">
+        <p><span>Showings</span> - the number of times Unsift displays your site on the explore page</p>
+        <p><span>Views</span> - the number of times users view your site description</p>
+        <p><span>Clicks</span> - the number of times users visit your site</p>
+        <p><span>Saves</span> - the number of users that have your site saved to their libraries</p>
+      </div>
+      <div id="pub-performance-summary-wrapper">
+        <table id="pub-performance-summary">
+          <tr>
+            <td></td>
+            <th>Showings</th>
+            <th>Views</th>
+            <th>Clicks</th>
+            <th>Saves</th>
+          </tr>
+          <tr>
+            <th id="pps_today">Today</th>
+            <td class="pd__m0"></td>
+            <td class="pd__m1"></td>
+            <td class="pd__m2"></td>
+            <td class="pd__m3"></td>
+          </tr>
+          <tr>
+            <th>All-time</th>
+            <td class="cd__m0"></td>
+            <td class="cd__m1"></td>
+            <td class="cd__m2"></td>
+            <td class="cd__m3"></td>
+          </tr>
+        </table>
+      </div>
+      
+      <div class="pa-compare-counters">
+        <h2 class="pub-analytics-metric-title">Compare Yesterday's Performance</h2>
+        <p>See how {{ site.name }} compares to other sites on Unsift</p>
+        <button id="pubdash-load-cmpsites">
+          <span class="pcmr-series">
+            <svg class="pubdash-compare-m-refresh" viewBox="0 0 24 24">
+                <path fill="#3C6CC4" d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z" />
+            </svg>
+            Show more sites
+          </span>
+        </button>
+        <p id="pub-compare-nodata">No data from yesterday</p>
+        <table id="pa-compare-counters-table" class="-non-mobile-table">
+          <tr>
+            <td></td>
+            <th>Showings</th>
+            <th>Views</th>
+            <th>Clicks</th>
+            <th>Saves</th>
+          </tr>
+          <tr id="pubdash-compare-yoursite">
+            <th></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="pubdash-compare-dummy">
+            <th></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          
+        </table>
+
+        <table class="-mobile-table pcc__m__tbl">
+          <tr class="pcc__m__hdrs">
+            <td>Amazon</td>
+            <td>{{ site.name }}</td>
+          </tr>
+          <tr>
+            <td>Showings<br/>1000</td>
+            <td><span class="pacc__n">&lt; 1% Difference</span></td>
+          </tr>
+          <tr>
+            <td>Views<br/>742</td>
+            <td><span class="pacc__m">X% More</span></td>
+          </tr>
+          <tr>
+            <td>Clicks<br/>381</td>
+            <td><span class="pacc__l">X% Less</span></td>
+          </tr>
+          <tr>
+            <td>Saves<br/>62</td>
+            <td><span class="pacc__n">&lt; 1% Difference</span></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="pub-details-sec">
+    <h1 class="pub-analytics-header">Site Details</h1>
+    <p class="pub-analytics-subheader pasuh">Modify the information shown with {{ site.name }}</p>
+    <p class="pash-lastmod">Last change was on <span></span></p>
+    <p class="pash-lastmod_sub">You may modify your site information at most one time every 30 days.</p>
+    <!-- title, destination url, description, and images -->
+    <form id="pub-analytics-modify-form" enctype="multipart/form-data" action="{% url 'pubdash:manage' pk=site.pk %}" method="POST">
+      {% csrf_token %}
+      {{ updateSiteForm.site }}
+      <div id="pubdash-sitedetails">
+        <div id="pubdash-sitedetails_group">
+          <div id="pubdash-sitedetails_subgroup">
+            <div>
+              Name
+              {{ updateSiteForm.name }}
+            </div>
+            <div class="pamf-media-sec-categories-series" style="width:auto;margin-top:35px;">
+              Site Tag
+              <div class="pub-analytics-categories-array">
+                <p>No tag selected</p>
+              </div>
+            </div>
+            <div class="pamf-media-sec-heading-series" style="margin:35px 0 0;">
+              <span class="pamf-media-sec-heading">Site Logo (optional)</span>
+              <button id="pubdash-change-logo_toggle" type="button">Update logo</button>
+              {{ updateSiteForm.change_logo }}
+              <div class="pamf-media-display-full pamf-itm" id="pamf-media-display-logo_generate--marker">
+                <div class="pamf-media-display-logo">
+                  <span>Upload a logo (jpg/jpeg, png)</span>
+                  {{ updateSiteForm.logo }}
+                  <img id="pubdash-current-logo_display" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="0" height="0" alt="" />
+                </div>
+                <div class="pamf-media-display-logo_generate--wrapper">
+                  <div id="pamf-media-display-logo_generate"></div>
+                  <p class="pamf-media-display-full--logo-text">This is your default logo</p>
+                  <button type="button" class="pamf-media-display-full--logo-usedefault">Use default logo</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="width:50%;margin:0;">
+            Description
+            <div class="pubdash-details-description-group">
+              <p>Create a description for {{ site.name }}</p>
+              {{ updateSiteForm.description }}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      <div id="pub-analytics-submission-group">
+        <input type="submit" value="Save Changes" id="pub-update-site-details__btn" class="ripple l--a-f-f_disable">
+        <p>We review all changes for compliance with our <a href="#" title="Terms of Publishing">Terms of Publishing</a>.</p>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="pub-delete-site-wrapper" class="-non-mobile">
+  <p>Remove this site</p>
+  <p><span>be careful</span> - this action will cancel your subscription and permanently delete your site</p>
+  <label style="margin-top:0" for="pub-delete-site-input-password">Enter your password</label>
+  <input type="password" id="pub-delete-site-input-password" class="pub-delete-site-input" placeholder="Your password" maxlength="128">
+  <label for="pub-delete-site-input-2fa" id="pub-delete-site-input-2fa_label">Enter the 6-digit code generated by your authenticator app</label>
+  <input type="number" id="pub-delete-site-input-2fa" class="pub-delete-site-input" placeholder="6-digit code" max="999999">
+  <label for="pub-delete-site-input-reason">Reason for cancellation</label>
+  <select id="pub-delete-site-input-reason">
+    <option value="COST">Cost</option>
+    <option value="NEFF">Not effective</option>
+    <option value="PEXP">Poor experience</option>
+    <option value="OTHR">Other</option>
+  </select>
+  <textarea id="pub-delete-site-input-reason_optional" maxlength="256" placeholder="(Optional) Any feedback for us?"></textarea>
+  <button id="pubdash-delete-site" class="ripple l--a-f-f_disable">Delete Site</button>
+</div>
+<div class="delete-site-loader animated -non-mobile"><div class="delete-site-loader-outer"><div class="delete-site-loader-inner"></div></div></div>
+
+
+{% if updateSiteForm.errors %}
+  {% for field in updateSiteForm %}
+    {% if field.errors %}
+      <p class="notification-err">{{ field.errors.as_text|cut:'* '}}</p>
+    {% endif %}
+  {% endfor %}
+  {% for error in updateSiteForm.non_field_errors %}
+    <p class="notification-err">{{error}}</p>
+  {% endfor %}
+{% endif %}
+
+<div class="-mobile">
+  <p id="mobile--wall">This page requires a larger screen</p>
+  <p id="mobile--wall_back"><a href="{% url 'explore:explore' %}" title="Explore new sites">Tap here</a>if not redirected back</p>
+</div>
+{% endblock %}
+
+{% block jsfiles %}
+    <script src="{% static 'js/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/svg.js' %}"></script>
+    <script src="{% static 'js/dynamic-logo.js' %}"></script>
+    <script src="{% static 'js/apexcharts.min.js' %}"></script>
+    <script src="{% static 'js/pub-dash-manage.js' %}"></script>
+    <script src="{% static 'js/numeral.min.js' %}"></script>
+    <script src="{% static 'js/api-pubdash.js' %}"></script>
+    <script src="{% static 'js/mobile-wall.js' %}"></script>
+{% endblock %}
