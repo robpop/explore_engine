@@ -1,0 +1,164 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Onboard - Unsift{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/onboard.css' %}">
+{% endblock %}
+
+{% block content %}
+    <form id="share-upload-form" enctype="multipart/form-data" action="{% url 'publish:onboarding' %}" method="POST">
+    {% csrf_token %}
+    {{ onboardingForm.account }}
+    <div id="share-form-all-packets" class="-non-mobile">
+      <div class="share-tab st0_fx" id="onboard-site-verify">Your Site URL<br /><br />
+        <p style="margin:0">{{ onboardingForm.url }}</p>
+          <div class="onboard-verify-option-array">
+            <p class="onboard-verify-option-prelim-text">Before we can add <span id="ovmmp-mutable">your site</span> to Unsift, we need to make sure you are the owner.</p>
+            <h2 class="onboard-verify-header-prompt">Verification Method</h2>
+            <p class="onboard-verify-choose">How do I choose?</p>
+            <div class="onboard-verify-option-group">
+              <p class="onboard-verify-option mtag">Meta Tag</p>
+              <label class="onboard-verify-switch">
+                {{ onboardingForm.verificationMethod }}
+                <span class="slider slider-verify round"></span>
+              </label>
+              <p class="onboard-verify-option dnrec">DNS Record</p>
+              {{ onboardingForm.verificationCode }}
+            </div>
+            <p class="onboard-verify-option-prelim-text">We'll send you an email on how to verify ownership after you submit your site.</p>
+          </div>
+      </div>
+
+
+    <div id="onboard-site-details" class="share-tab st1_fx">
+      <!-- title, destination url, description, and images -->
+      <div id="onboard-site-details-group">
+        
+        <div id="onboard-sitedetails-first-half">
+          <div style="margin-bottom:35px;">
+            Name
+            {{ onboardingForm.name }}
+          </div>
+          Description
+          <div class="onboard-details-description-group">
+            <p>Create a description for your site</p>
+            {{ onboardingForm.description }}
+         </div>
+          <div class="pamf-media-sec-heading-series">
+            <span class="pamf-media-sec-heading">Site Logo (optional)</span>
+            <div class="pamf-media-display-full pamf-itm" id="pamf-media-display-logo_generate--marker">
+              <div class="pamf-media-display-logo">
+                <span>Upload a logo (jpg/jpeg, png)</span>
+                {{ onboardingForm.logo }}
+                <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="0" height="0" alt="" />
+              </div>
+              <div class="pamf-media-display-logo_generate--wrapper">
+                <div id="pamf-media-display-logo_generate"></div>
+                <p class="pamf-media-display-full--logo-text">This is your default logo</p>
+                <button type="button" class="pamf-media-display-full--logo-usedefault">Use default logo</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="onboard-sitedetails-second-half">
+          <div id="pub-analytics-masterarray">
+            <div id="pub-analytics-subarray-one">
+              <div class="pamf-media-sec-categories-series">
+                Site Tag
+                <div class="pub-analytics-categories-array">
+                  <div class="pub-analytics-current-categories"><p>No tag selected</p></div>
+                  <div class="pub-analytics-categories-series">
+                    <p id="pub-analytics-categories-prompt">Select a tag that describes your site</p>
+                    <div class="pub-analytics-all-top-categories-feed">
+                      <ul id="pub-analytics-top-categories-feed__display"></ul>
+                      {{ onboardingForm.category }}
+                    </div>
+                    <div class="pub-analytics-request-category-series">
+                      <label class="pub-analytics-request-category-nsfw"><input type="checkbox" name="checkbox" value="value">My site primarily contains <a href="#" title="Terms Of Publishing" target="_blank" rel="noopener noreferrer">adult content</a></label>
+                      <!--<a href="#" title="Request a new category" class="pub-analytics-request-category">Request a new tag</a>-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div id="onboard-site-subscription">
+      <div>
+        <!-- left -->
+        <h2>Billing Plan</h2>
+        <p>We review all sites for quality. Billing begins after approval. Total includes this site plus any other active subscriptions.</p>
+      </div>
+      <div>
+        <!-- right -->
+        <table>
+          <tr>
+            <td></td>
+            <td>This site <span style="color: #3CC46C;">$10/mo</span></td>
+          </tr>
+
+          <tr id="current_active_sites_wrapper">
+            <td style="padding-right: 7px; text-align: right;">+</td>
+            <td>Your sites <span style="color: #3CC46C;">$<span id="current_active_sites_qty">-</span>/mo</span></td>
+          </tr>
+
+          <tr>
+            <td style="font-family: 'Oxygen-Bold';padding-right: 3px;">Total</td>
+            <td style="border-top:1px solid #1B2F56;"><span style="color: #3CC46C;">$<span id="current_active_sites_qty_tot">-</span>/mo</span> + tax</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="share-form-all-packets_mobile" class="-mobile">
+    <p id="mobile--wall">This page requires a larger screen</p>
+    <p id="mobile--wall_back"><a href="{% url 'explore:explore' %}" title="Explore new sites">Tap here</a>if not redirected back</p>
+  </div>
+
+  <div class="h-captcha -non-mobile" data-sitekey="10000000-ffff-ffff-ffff-000000000001"></div>
+
+  <div class="-non-mobile">
+    <div id="onboard-top-agrmt">
+      {{ onboardingForm.agreement }}I have read and agree to the&nbsp;<a href="#" title="Terms of Publishing">Terms of Publishing</a>.<br/>
+    </div>
+    <div style="overflow:auto;" id="share-form-buttons">
+        <button type="submit" id="share-nextBtn" class="onboard-Btn">Continue</button>
+    </div>
+  </div>
+  
+  <div class="create-site-loader animated -non-mobile"><div class="addtolib-progress-loader-outer"><div class="addtolib-progress-loader-inner"></div></div></div>
+
+  </form>
+
+  {% if onboardingForm.errors %}
+    {% for field in onboardingForm %}
+      {% if field.errors %}
+        <p class="notification-err">{{ field.errors.as_text|cut:'* '}}</p>
+      {% endif %}
+    {% endfor %}
+    {% for error in onboardingForm.non_field_errors %}
+      <p class="notification-err">{{ error }}</p>
+    {% endfor %}
+  {% endif %}
+
+{% endblock %}
+
+{% block jsfiles %}
+    <script src="https://hcaptcha.com/1/api.js" async defer></script>
+    <script src="{% static 'js/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>    
+    <script src="{% static 'js/share-form-steps.js' %}"></script>
+    <script src="{% static 'js/onboard-site-details.js' %}"></script>
+    <script src="{% static 'js/svg.js' %}"></script>
+    <script src="{% static 'js/generate-logo.js' %}"></script>
+    <script src="{% static 'js/mobile-wall.js' %}"></script>
+    <script src="{% static 'js/captcha-err.js' %}"></script>
+{% endblock %}

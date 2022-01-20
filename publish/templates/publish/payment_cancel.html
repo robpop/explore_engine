@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Unsift - Payment Cancelled{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/login-signup.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="log-sign-full-center">
+  <div id="log-sign-mutable-card">
+    <p class="log-sign-2fa-auth" style="margin: 10px 0;">Sorry, Unsift requires payment information before publishing your site. Please <a href="{% url 'publish:payment' %}" title="Provide your payment details">provide your payment details</a> to proceed with publishing. You will not be charged until your site is approved and published.</p>
+  </div>
+</div>
+{% endblock %}
+
+{% block jsfiles %}
+{% endblock %}

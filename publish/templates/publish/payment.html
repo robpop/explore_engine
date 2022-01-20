@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Unsift - Payment{% endblock %}
+
+{% block cssfiles %}
+<script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
+
+{% block content %}
+
+  <div id="unsift-payment-checkout-wrapper">
+    <h1 id="unsift-payment-checkout" class="animated fasterer fadeIn">Payment method</h1>
+    <div class="addtolib-progress-loader animated" style="display:inline-block;position:static;visibility: visible;margin-top:15px;"><div class="addtolib-progress-loader-outer"><div class="addtolib-progress-loader-inner"></div></div></div>
+  </div>
+  <script>
+    var stripe = Stripe('pk_test_AZpW24lCAB8yQjN8cafFPHmP004EmooJKc');
+    stripe.redirectToCheckout({
+      sessionId: "{{ checkoutSessionID }}"
+    }).then(function (result) {
+      console.log(result);
+    });
+  </script>
+{% endblock %}
+
+{% block jsfiles %}
+{% endblock %}

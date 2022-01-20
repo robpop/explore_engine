@@ -1,0 +1,114 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Publish - Unsift{% endblock %}
+{% block description %}Publish your site on Unsift and expand your online audience.{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/onboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div id="share-splash-array" class="-wrapper-flex">
+  <div id="share-getstarted-wrap" class="share-splash-item">
+    <div class="share-splash-counter">
+      <h3><span id="share-splash-total_sites" class="spc_0 animated fasterer fadeIn">X</span><span class="spc_1 animated fasterer spc_dis fadeIn">Y</span></h3>
+      <p><span class="spc_0 animated fasterer fadeIn">Sites discovered with Unsift</span><span class="spc_1 animated fasterer spc_dis fadeIn">Sites added last week</span></p>
+    </div>
+    <a href="{% url 'publish:onboarding' %}" title="Add your site" class="ripple">Get Started</a>
+  </div>
+  <div id="share-sellingpoint-wrap" class="share-splash-item">
+    <div id="ssi-itm0" class="ssi-outer animated">
+      <svg enable-background="new 0 0 502.23 502.23" version="1.1" viewBox="0 0 502.23 502.23" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+      	<path d="m249.67 107.43c19.274-47.108 64.935-78.049 115.83-78.49 69.781 0 120.03 59.693 126.35 130.83 1.819 16.595 0.429 33.385-4.094 49.455-10.472 42.923-33.705 81.665-66.636 111.12l-171.45 152.96-168.56-152.97c-32.931-29.454-56.164-68.196-66.636-111.12-4.523-16.07-5.912-32.86-4.094-49.455 6.318-71.14 56.569-130.83 126.35-130.83 50.176 0.546 94.939 31.658 112.94 78.499z" fill="#A1C0F7"/>
+      	<path d="m247.33 107.43c19.499-46.202 38.924-78.49 90.731-78.49 69.781 0 120.03 59.693 126.35 130.83 1.819 16.595 0.429 33.385-4.094 49.455-10.472 42.923-33.705 81.665-66.636 111.12l-146.35 152.96-168.56-152.97c-31.816-29.73-53.723-68.522-62.755-111.12-4.523-16.07-5.912-32.86-4.094-49.455 6.317-71.14 52.688-130.83 122.47-130.83 50.177 0.546 94.94 31.658 112.94 78.499z" fill="#EAEAF5"/>
+      	<path d="m11.917 159.77c6.317-71.142 56.568-130.84 126.35-130.84 4.558 0.028 9.111 0.31 13.637 0.844-62.526 7.295-106.65 63.641-112.54 129.99-1.819 16.594-0.429 33.384 4.094 49.453 10.472 42.923 33.705 81.665 66.636 111.12l145.26 151.82-1.254 1.137-171.45-152.96c-32.932-29.455-56.165-68.197-66.636-111.12-4.523-16.07-5.913-32.859-4.094-49.453z" fill="#FFF6F5"/>
+      	<path d="m249.67 482.96c-2.401 2e-3 -4.715-0.893-6.491-2.509l-168.57-152.97c-34.439-30.714-58.7-71.195-69.547-116.05-4.698-17.22-6.148-35.164-4.274-52.915 7.33-80.707 64.453-139.25 135.93-139.25 46.938 0.249 90.109 25.739 113 66.717 24.131-41.093 68.12-66.439 115.77-66.708 71.481 0 128.6 58.547 135.93 139.25 1.874 17.751 0.425 35.695-4.274 52.915-10.849 44.854-35.109 85.338-69.547 116.06l-171.51 153.01c-1.771 1.58-4.061 2.453-6.434 2.453zm-112.94-444.38c-61.358 0-110.44 51.321-116.73 122.03-0.029 0.326-0.076 0.651-0.142 0.972-1.445 15.257-0.083 30.649 4.019 45.415 9.95 41.045 32.177 78.082 63.717 106.17l162.13 147.14 164.96-147.18c31.513-28.082 53.72-65.1 63.66-106.12 4.115-14.783 5.471-30.197 4-45.471-6.406-71.623-55.5-122.94-116.85-122.94-47.011 0.447-89.164 29.059-106.93 72.585-1.508 3.579-5.013 5.906-8.896 5.906s-7.389-2.327-8.896-5.906c-16.596-43.182-57.791-71.924-104.05-72.595z" fill="#3C6CC4"/>
+      </svg>
+      <div class="ssi-inner">
+        <h2>No Site Left Behind</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras purus magna, consectetur eu diam ut, pharetra commodo magna. Sed vitae.
+        </p>
+      </div>
+    </div>
+
+    <div id="ssi-itm1" class="ssi-outer animated">
+      <svg enable-background="new 0 0 512 512" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+      	<polygon points="406.6 9.143 286.12 9.143 9.143 285.39 226.14 502.86 502.86 226.87 502.86 105.18" fill="#A1C0F7"/>
+      	<polygon points="406.6 9.143 286.12 9.143 9.143 285.39 226.14 502.86 502.86 226.87 502.86 105.18" fill="#A1C0F7"/>
+      	<g fill="#A1C0F7">
+      		<polygon points="402.28 9.143 286.12 9.143 9.143 283.43 207.85 475.43 484.57 199.44 484.57 77.751"/>
+      		<polygon points="406.6 9.143 286.12 9.143 64 230.54 281 448 502.86 226.87 502.86 105.18"/>
+      	</g>
+      		<linearGradient id="a" x1="-48.881" x2="-47.881" y1="652.16" y2="652.16" gradientTransform="matrix(411.43 0 0 -411.43 20175 2.6853e5)" gradientUnits="userSpaceOnUse">
+      		<stop stop-color="#D5E2F6" offset="0"/>
+      		<stop stop-color="#D5E2F6" offset=".1717"/>
+      		<stop stop-color="#D5E2F6" offset=".2"/>
+      		<stop stop-color="#D5E2F6" offset=".2001"/>
+      		<stop stop-color="#EAEAF5" offset=".2007"/>
+      		<stop stop-color="#F6F1F4" offset=".2014"/>
+      		<stop stop-color="#FDF4F4" offset=".2023"/>
+      		<stop stop-color="#FFF6F5" offset=".205"/>
+      		<stop stop-color="#FFF6F5" offset=".2522"/>
+      		<stop stop-color="#FFF6F5" offset=".26"/>
+      		<stop stop-color="#D5E2F6" offset=".26"/>
+      		<stop stop-color="#D5E2F6" offset=".3974"/>
+      		<stop stop-color="#D5E2F6" offset=".42"/>
+      		<stop stop-color="#D5E2F6" offset=".4201"/>
+      		<stop stop-color="#EAEAF5" offset=".4207"/>
+      		<stop stop-color="#F6F1F4" offset=".4214"/>
+      		<stop stop-color="#FDF4F4" offset=".4223"/>
+      		<stop stop-color="#FFF6F5" offset=".425"/>
+      		<stop stop-color="#FFF6F5" offset=".4894"/>
+      		<stop stop-color="#FFF6F5" offset=".5"/>
+      		<stop stop-color="#F9F2F4" offset=".5"/>
+      		<stop stop-color="#E8EBF4" offset=".5001"/>
+      		<stop stop-color="#DDE5F4" offset=".5003"/>
+      		<stop stop-color="#D6E2F4" offset=".5005"/>
+      		<stop stop-color="#D5E2F6" offset=".501"/>
+      		<stop stop-color="#D5E2F6" offset=".7062"/>
+      		<stop stop-color="#D5E2F6" offset=".74"/>
+      		<stop stop-color="#FFF6F5" offset=".741"/>
+      		<stop stop-color="#FFF6F5" offset=".8346"/>
+      		<stop stop-color="#FFF6F5" offset=".85"/>
+      		<stop stop-color="#D5E2F6" offset=".851"/>
+      	</linearGradient>
+      	<polygon points="379.17 9.143 286.12 9.143 64 230.54 265.14 420.57 475.43 219.43 475.43 105.18" fill="url(#a)"/>
+      	<circle cx="393.32" cy="118.26" r="26.834" fill="#A1C0F7"/>
+      	<g fill="#3C6CC4">
+      		<path d="m226.14 512c-2.43 4e-3 -4.761-0.964-6.473-2.688l-217-217.46c-1.713-1.717-2.673-4.043-2.669-6.468 3e-3 -2.425 0.97-4.749 2.688-6.461l276.97-276.25c1.715-1.708 4.036-2.668 6.456-2.67h120.48c2.42 2e-3 4.74 0.962 6.455 2.67l96.259 96.036c1.722 1.714 2.689 4.044 2.688 6.473v121.7c1e-3 2.429-0.966 4.759-2.688 6.473l-276.71 275.98c-1.712 1.712-4.035 2.672-6.455 2.67zm-204.07-226.59l204.09 204.52 267.55-266.85v-114.11l-90.893-90.688h-112.93l-267.82 267.12z"/>
+      		<path d="m393.28 154.24c-19.87-2e-3 -35.976-16.112-35.973-35.982 2e-3 -19.87 16.112-35.976 35.982-35.973 19.87 2e-3 35.976 16.112 35.973 35.982-0.02 19.863-16.12 35.958-35.982 35.973zm0-53.669c-9.77 2e-3 -17.688 7.924-17.687 17.693 1e-3 9.77 7.921 17.69 17.69 17.69s17.691-7.918 17.693-17.687c-9e-3 -9.77-7.927-17.687-17.696-17.696z"/>
+      		<path d="m281 457.14c-2.43 4e-3 -4.761-0.964-6.473-2.688l-217-217.46c-1.713-1.717-2.673-4.043-2.669-6.468 3e-3 -2.425 0.97-4.749 2.688-6.46l222.11-221.39c1.712-1.711 4.035-2.672 6.456-2.67h120.48c2.42 2e-3 4.74 0.962 6.455 2.67l96.259 96.036c1.722 1.714 2.689 4.044 2.688 6.473v121.7c1e-3 2.429-0.966 4.759-2.688 6.473l-221.86 221.12c-1.713 1.71-4.035 2.67-6.455 2.67zm-204.06-226.59l204.08 204.52 212.7-211.99v-114.11l-90.893-90.688h-112.93l-212.96 212.27z"/>
+      		<path d="m9.152 128c-3.975 2e-3 -7.496-2.564-8.71-6.349-1.215-3.785 0.155-7.921 3.389-10.232 1.982-1.41 199.61-139.42 385.65 0.126 2.623 1.955 4.001 5.163 3.613 8.411s-2.482 6.042-5.491 7.324c-3.009 1.283-6.475 0.859-9.087-1.11-175.48-131.57-362.2-1.196-364.06 0.125-1.545 1.11-3.4 1.707-5.303 1.705z"/>
+      		<path d="m380.4 438.96c-23.041 0.235-45.756-5.456-65.964-16.527-30-17.071-76.259-61.688-49.009-168.69 1.248-4.892 6.224-7.846 11.116-6.598s7.846 6.224 6.598 11.116c-17.973 70.589-3.652 123.24 40.339 148.28 43.741 24.893 102.13 14.33 127.2-10.714 68.223-68.232 27.723-141.33 25.964-144.41-2.486-4.373-0.973-9.933 3.387-12.443 4.359-2.51 9.928-1.027 12.461 3.318 28.577 55.719 16.794 123.63-28.884 166.46-22.806 20.416-52.614 31.237-83.205 30.206z"/>
+      	</g>
+      </svg>
+      <div class="ssi-inner">
+        <h2>Flat Monthly Pricing</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras purus magna, consectetur eu diam ut, pharetra commodo magna. Sed vitae.
+        </p>
+      </div>
+    </div>
+
+    <div id="ssi-itm2" class="ssi-outer animated">
+      <svg enable-background="new 0 0 512.26 512.26" version="1.1" viewBox="0 0 512.26 512.26" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+      	<path d="m379.99 388.34c-35.09 0.098-68.762-13.846-93.508-38.725-3.332-3.332-3.332-8.735 0-12.067s8.735-3.332 12.067 0c38.868 38.852 99.768 44.839 145.46 14.299s63.445-89.1 42.409-139.87-75.007-79.613-128.91-68.888c-53.9 10.725-92.719 58.029-92.719 112.98 0.024 63.192-44.616 117.59-106.6 129.9s-124.02-20.897-148.15-79.301-3.619-125.72 48.978-160.74 122.62-27.997 167.2 16.784c3.328 3.339 3.318 8.743-0.021 12.071s-8.743 3.318-12.071-0.021c-38.805-38.944-99.722-45.039-145.47-14.556s-63.588 89.049-42.594 139.86 74.967 79.705 128.89 69.002 92.772-58.019 92.771-113c0-73.049 59.218-132.27 132.27-132.27s132.27 59.218 132.27 132.27-59.218 132.27-132.27 132.27z" fill="#3C6CC4"/>
+      </svg>
+      <div class="ssi-inner">
+        <h2>No Limits</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras purus magna, consectetur eu diam ut, pharetra commodo magna. Sed vitae.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block jsfiles %}
+<script src="{% static 'js/numeral.min.js' %}"></script>
+<script src="{% static 'js/onboarding-splash.js' %}"></script>
+{% endblock %}

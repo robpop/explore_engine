@@ -1,0 +1,69 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Claims - Unsift{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/onboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="pubdash-claimsite">
+  <div id="pubdash-verifysite_form">
+    <p id="claims__header">Claim your site</p>
+    <p id="claims__description">Is your site already on Unsift? Verify ownership and gain access to it here. Unverified claims are automatically removed after three days.</p>
+    
+    <div id="claims_opt__wrapper">
+      <button style="padding-left:0">Create a claim</button>
+      <button style="border-left:1px solid #1B2F56">View your claims</button>
+    </div>
+    
+    <ul id="claims_current__list">
+      <li class="claims_instance__dummy">
+        <div class="claims_instance__main_info">
+          <p>Site: <span></span></p>
+          <p>Verification method: <span></span></p>
+          <button>Show more</button>
+        </div>
+        <div class="claims_instance__expanded_info">
+          <p class="pubdash-verify-method__meta-input ripple-blue pubdash-verify__copy">&#60;meta name=&#34;unsift-site-verification&#34; content=&#34;<span></span>&#34;&#62;</p>
+          <p class="pubdash-verify-method__dns-input ripple-blue pubdash-verify__copy">unsift-site-verification=<span></span></p>
+          <p class="pubdash-verifysite_instructions"></p>
+          <button class="pubdash-verify_claim ripple" type="button">Verify</button>
+          <div class="verifysite-progress-loader animated"><div class="addtolib-progress-loader-outer"><div class="addtolib-progress-loader-inner"></div></div></div>
+        </div>
+      </li>
+    </ul>
+    
+    <div id="claims_new__form">   
+      
+      <label for="claims_url_input">Your Site URL</label>
+      <input id="claims_url_input" type="text" placeholder="https://www.example.com/">
+      
+      <div id="claims_new_functions__wrapper">
+        <p id="claims_new__verify-label">Before you can claim your site, we need to make sure you are the owner.</p>
+        <h2 class="onboard-verify-header-prompt">Verification Method</h2>
+        <p class="onboard-verify-choose">How do I choose?</p>
+        <div class="onboard-verify-option-group">
+          <p class="onboard-verify-option mtag">Meta Tag</p>
+          <label class="onboard-verify-switch">
+            <input type="checkbox">
+            <span class="slider slider-verify round"></span>
+          </label>
+          <p class="onboard-verify-option dnrec">DNS Record</p>
+        </div>
+        <p id="claims_new__verify-label_instruct">You'll be able to verify ownership after creating your claim.</p>
+      </div>
+      
+      
+      <button id="pubdash-create_claim" type="button" class="ripple l--a-f-f_disable">Create claim</button>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block jsfiles %}
+<script src="{% static 'js/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+<script src="{% static 'js/claims.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Unsift - Payment Success{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/login-signup.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="log-sign-full-center">
+  <div id="log-sign-mutable-card">
+    <p class="log-sign-2fa-auth" style="margin: 10px 0;">Your payment information was successfully submitted</p>
+    <a class="log-sign-2fa-auth minor_pages_link" href="{% url 'pubdash:dashboard' %}" style="margin-bottom:10px" title="Your publisher dashboard">Your publisher dashboard</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block jsfiles %}
+{% endblock %}
