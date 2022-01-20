@@ -1,0 +1,132 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Unsift - Audits{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/staff.css' %}">
+<link rel="stylesheet" href="{% static 'css/staff-main.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div id="__ssb">
+  <ul>
+    <li><a href="{% url 'staff:home' %}" title="Platform metrics">Platform metrics</a></li>
+    <li><a href="{% url 'staff:support' %}" title="Support tickets">Support tickets</a></li>
+    <li><a href="{% url 'staff:vettings' %}" title="Vettings">Vettings</a></li>
+    <li class="selected"><a href="{% url 'staff:audits' %}" title="Audits">Audits</a></li>
+    <li><a href="{% url 'staff:changes' %}" title="Audits">Site changes</a></li>
+  </ul>
+</div>
+<div id="__ssa" class="__ss">
+  <p style="font-weight:bold;">Audits based on negative user feedback</p>
+  <ul id="__ssa_audits_list">
+    <li class="__ssa_audits_instance_dummy">
+      <div class="__ssa-siteinstance_main">
+        <p>Name: <span></span></p>
+        <p>Tag: <span></span></p>
+        <p>Description: <span></span></p>
+        <p>URL: <a href="#" title="Site url" target="_blank" rel="noopener noreferrer"></a></p>
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Site logo">
+        <p></p>
+        <div>
+          <h2 style="font-family:'Oxygen-Bold';font-size:18px;margin-top:35px;">User feedback</h2>
+          <ul class="__ssa_audits_feedback_list">
+            <li class="__ssa_audits_instance_feedback_dummy">
+              <p>Subject: <span></span></p>
+              <p>Rating: <span></span></p>
+              <p>Feedback: <span></span></p>
+              <p>For site: <span></span></p>
+            </li>
+          </ul>
+        </div>
+        <button class="__ssa_audits_makedecision">Make decision</button>
+      </div>
+      <div class="__ssv-siteinstance_expanded">
+        <!--
+          - APIVoid scan action
+        
+          email action
+          - checklist of approval
+          - email form (notes to the publisher)
+          
+          the email notes form is readonly until the Staff
+          selects "add comments", at which point "Staff comments" will be
+          appended to the email body below the checklist content, and the
+          notes will no longer be readonly
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li>- Fast and friendly UI/UX</li>
+          <li>- Accessibility</li>
+          
+          <li>- Mobile friendly design</li>
+          <li>- Compatibility with Chrome and Firefox</li>
+        -->
+        <p>DONT's</p>
+        <input type="checkbox" style="width:auto" class="__ssv__d0">
+        <label>Excessive advertising</label><br>
+        <input type="checkbox" style="width:auto" class="__ssv__d1">
+        <label>Informational / local business sites</label><br>
+        <input type="checkbox" style="width:auto" class="__ssv__d2">
+        <label>Providing inaccurate site information</label><br>
+        <input type="checkbox" style="width:auto" class="__ssv__d3">
+        <label>Malware and other malicious content</label><br>
+        <input type="checkbox" style="width:auto" class="__ssv__d4">
+        <label>Illegal or violent content</label><br>
+        <input type="checkbox" style="width:auto" class="__ssv__d5">
+        <label>Sexual assault or exploitation</label><br>
+        <input type="checkbox" style="width:auto" class="__ssv__d6">
+        <label>Sexual or suggestive content involving minors</label><br>
+        <input type="checkbox" style="width:auto" class="__ssv__d7">
+        <label>Hate speech, threats, harassment, or bullying</label><br>
+        <input type="checkbox" style="width:auto" class="__ssv__d8">
+        <label>Exposing personal or confidential information</label><br>
+        <input type="checkbox" style="width:auto" class="__ssv__d9">
+        <label>Excessively obscene content</label><br>
+        <input type="checkbox" style="width:auto" class="__ssv__d10">
+        <label>Multi-level marketing companies, scams, or other deceitful content</label><br>
+        <input type="checkbox" style="width:auto" class="__ssv__d11">
+        <label>Intellectual property violations</label><br>
+        <input type="checkbox" style="width:auto" class="__ssv__d12">
+        <label>Anything against our Terms of Publishing</label><br>
+        
+        <p>DO's</p>
+        <input type="checkbox" checked style="width:auto" class="__ssv__d13">
+        <label>Original and engaging content</label><br>
+        <input type="checkbox" checked style="width:auto" class="__ssv__d14">
+        <label>Has an English translation</label><br>
+        <input type="checkbox" checked style="width:auto" class="__ssv__d15">
+        <label>Mobile friendly design</label><br>
+        <input type="checkbox" checked style="width:auto" class="__ssv__d16">
+        <label>Lighthouse audit (accessibility >= 50)</label><br>
+        <input type="checkbox" checked style="width:auto" class="__ssv__d17">
+        <label>Lighthouse audit (best practices >= 50)</label><br>
+        <input type="checkbox" checked style="width:auto" class="__ssv__d18">
+        <label>Compatibility with Chrome and Firefox</label><br>
+        
+        <textarea readonly class="__ssv_denial_notes" placeholder="Reasons for denial listed here from checklist above (if site is being denied). This is added to the email sent to publisher." style="margin-top: 35px; width:600px; height:250px;"></textarea><br>
+
+        <button class="__ssa__pass_site">PASS</button>
+        <button class="__ssa__remove_site">REMOVE</button>
+        <button class="__ssa__inst__chickenout">Return</button>
+        
+        <input type="password" placeholder="password" class="__ssa__denial_password">
+        <input type="number" placeholder="2FA code" class="__ssa__denial_2fa">
+      </div>
+    </li>
+  </ul>
+</div>
+
+{% endblock %}
+
+{% block jsfiles %}
+<script src="{% static 'js/staff-audits.js' %}"></script>
+{% endblock %}

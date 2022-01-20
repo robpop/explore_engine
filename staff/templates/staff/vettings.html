@@ -1,0 +1,413 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Unsift - Vettings{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/staff.css' %}">
+<link rel="stylesheet" href="{% static 'css/staff-main.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div id="__ssb">
+  <ul>
+    <li><a href="{% url 'staff:home' %}" title="Platform metrics">Platform metrics</a></li>
+    <li><a href="{% url 'staff:support' %}" title="Support tickets">Support tickets</a></li>
+    <li class="selected"><a href="{% url 'staff:vettings' %}" title="Vettings">Vettings</a></li>
+    <li><a href="{% url 'staff:audits' %}" title="Audits">Audits</a></li>
+    <li><a href="{% url 'staff:changes' %}" title="Audits">Site changes</a></li>
+  </ul>
+</div>
+<div id="__ssv" class="__ss">
+  <div id="__ssv-actions">
+    <button id="__ssv-actions__paid" type="button" style="float:left">Paid sites</button>
+    <button id="__ssv-actions__opinion" type="button" style="float:left">Requires second opinion - Paid</button>
+    <button id="__ssv-actions__free" type="button" style="float:left;margin-left:15px;">Free sites</button>
+    <button id="__ssv-actions__opinion_free" type="button" style="float:left">Requires second opinion - Free</button>
+    <button id="__ssv-actions__assigned" type="button" style="float:right">Assigned to me</button>
+  </div>
+  
+  <div id="__ssv-sitelist" class="__ssv-site_constructor">
+    <h1>Paid sites</h1>
+    <ul>
+      <li class="__ssv_sitelist_dummy">
+        
+        
+        <div class="__ssv-siteinstance_main">
+          <div class="__ssv-siteinstance_main__left">
+            <h2>This submission</h2>
+            <!--
+            - site url
+            - assigned status
+              - staff
+              - staff username
+            - decision
+              - decision date
+            -->
+            <p class="__ssv__inst-siteurl">URL: <span></span></p>
+            <p class="__ssv__inst-assigned">Assigned: <span></span></p>
+            <div class="__ssv__inst-assigned-info">
+              <p class="__ssv__inst-assignedstaff">Staff ID: <span></span></p>
+              <p class="__ssv__inst-assignedusername">Staff username: <span></span></p>
+            </div>
+            <p class="__ssv__inst-decision">Decision: <span></span></p>
+            <div class="__ssv__inst-decision-info">
+              <p class="__ssv__inst-decisiondate">Made on date: <span></span></p>
+            </div>
+            
+          </div>
+          <div class="__ssv-siteinstance_main__right">
+            <h2>Previous submissions</h2>
+            <!--
+            - prior vetting objects
+            -->
+            <div class="__ssv_sitelist__previous_dummy">
+              <p class="__ssv__inst-siteurl__previous">URL: <span></span></p>
+              <div class="__ssv__inst-assigned-info__previous">
+                <p class="__ssv__inst-assignedstaff__previous">Staff ID: <span></span></p>
+                <p class="__ssv__inst-assignedusername__previous">Staff username: <span></span></p>
+              </div>
+              <p class="__ssv__inst-decision__previous">Decision: <span></span></p>
+              <div class="__ssv__inst-decision-info__previous">
+                <p class="__ssv__inst-decisiondate__previous">Made on date: <span></span></p>
+              </div>
+              <p class="__ssv__inst-notes-reason__previous">Reason: <span></span></p>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  
+  
+  <div id="__ssv-sitelist__free" class="__ssv-site_constructor">
+    <h1>Free sites</h1>
+    <ul>
+      <li class="__ssv_sitelist__free_dummy">
+        
+        
+        <div class="__ssv-siteinstance_main">
+          <div class="__ssv-siteinstance_main__left">
+            <h2>This submission</h2>
+            <!--
+            - site url
+            - assigned status
+              - staff
+              - staff username
+            - decision
+              - decision date
+            -->
+            <p class="__ssv__inst-siteurl">URL: <a href="#" title="" target="_blank" rel="noopener noreferrer"></a></p>
+            <p class="__ssv__inst-assigned">Assigned: <span></span></p>
+            <div class="__ssv__inst-assigned-info">
+              <p class="__ssv__inst-assignedstaff">Staff ID: <span></span></p>
+              <p class="__ssv__inst-assignedusername">Staff username: <span></span></p>
+            </div>
+            <p class="__ssv__inst-decision">Decision: <span></span></p>
+            <div class="__ssv__inst-decision-info">
+              <p class="__ssv__inst-decisiondate">Made on date: <span></span></p>
+            </div>
+          </div>
+          <div class="__ssv-siteinstance_main__right">
+            <h2>Previous submissions</h2>
+            <!--
+            - prior vetting objects
+            -->
+            <div class="__ssv_sitelist__previous_dummy">
+              <p class="__ssv__inst-siteurl__previous">URL: <span></span></p>
+              <div class="__ssv__inst-assigned-info__previous">
+                <p class="__ssv__inst-assignedstaff__previous">Staff ID: <span></span></p>
+                <p class="__ssv__inst-assignedusername__previous">Staff username: <span></span></p>
+              </div>
+              <p class="__ssv__inst-decision__previous">Decision: <span></span></p>
+              <div class="__ssv__inst-decision-info__previous">
+                <p class="__ssv__inst-decisiondate__previous">Made on date: <span></span></p>
+              </div>
+              <p class="__ssv__inst-notes-reason__previous">Reason: <span></span></p>
+            </div>
+          </div>
+        </div>
+        
+      </li>
+    </ul>
+  </div>
+  
+  <div id="__ssv-sitelist__opinion_free" class="__ssv-site_constructor">
+    <h1>Requires second opinion - Free</h1>
+    <ul>
+      <li class="__ssv_sitelist__opinion_free_dummy">
+        
+        
+        <div class="__ssv-siteinstance_main">
+          <div class="__ssv-siteinstance_main__left">
+            <h2>This submission</h2>
+            <!--
+            - site url
+            - assigned status
+              - staff
+              - staff username
+            - decision
+              - decision date
+            -->
+            <p class="__ssv__inst-siteurl">URL: <a href="#" title="" target="_blank" rel="noopener noreferrer"></a></p>
+            <p class="__ssv__inst-assigned">Assigned: <span></span></p>
+            <div class="__ssv__inst-assigned-info">
+              <p class="__ssv__inst-assignedstaff">Staff ID: <span></span></p>
+              <p class="__ssv__inst-assignedusername">Staff username: <span></span></p>
+            </div>
+            <p class="__ssv__inst-decision">Decision: <span></span></p>
+            <div class="__ssv__inst-decision-info">
+              <p class="__ssv__inst-decisiondate">Made on date: <span></span></p>
+            </div>
+          </div>
+          <div class="__ssv-siteinstance_main__right">
+            <h2>Previous submissions</h2>
+            <!--
+            - prior vetting objects
+            -->
+            <div class="__ssv_sitelist__previous_dummy">
+              <p class="__ssv__inst-siteurl__previous">URL: <span></span></p>
+              <div class="__ssv__inst-assigned-info__previous">
+                <p class="__ssv__inst-assignedstaff__previous">Staff ID: <span></span></p>
+                <p class="__ssv__inst-assignedusername__previous">Staff username: <span></span></p>
+              </div>
+              <p class="__ssv__inst-decision__previous">Decision: <span></span></p>
+              <div class="__ssv__inst-decision-info__previous">
+                <p class="__ssv__inst-decisiondate__previous">Made on date: <span></span></p>
+              </div>
+              <p class="__ssv__inst-notes-reason__previous">Reason: <span></span></p>
+            </div>
+          </div>
+        </div>
+        
+      </li>
+    </ul>
+  </div>
+  
+  <div id="__ssv-sitelist__opinion" class="__ssv-site_constructor">
+    <h1>Requires second opinion - Paid</h1>
+    <ul>
+      <li class="__ssv_sitelist__opinion_dummy">
+        
+        
+        <div class="__ssv-siteinstance_main">
+          <div class="__ssv-siteinstance_main__left">
+            <h2>This submission</h2>
+            <!--
+            - site url
+            - assigned status
+              - staff
+              - staff username
+            - decision
+              - decision date
+            -->
+            <p class="__ssv__inst-siteurl">URL: <a href="#" title="" target="_blank" rel="noopener noreferrer"></a></p>
+            <p class="__ssv__inst-assigned">Assigned: <span></span></p>
+            <div class="__ssv__inst-assigned-info">
+              <p class="__ssv__inst-assignedstaff">Staff ID: <span></span></p>
+              <p class="__ssv__inst-assignedusername">Staff username: <span></span></p>
+            </div>
+            <p class="__ssv__inst-decision">Decision: <span></span></p>
+            <div class="__ssv__inst-decision-info">
+              <p class="__ssv__inst-decisiondate">Made on date: <span></span></p>
+            </div>
+          </div>
+          <div class="__ssv-siteinstance_main__right">
+            <h2>Previous submissions</h2>
+            <!--
+            - prior vetting objects
+            -->
+            <div class="__ssv_sitelist__previous_dummy">
+              <p class="__ssv__inst-siteurl__previous">URL: <span></span></p>
+              <div class="__ssv__inst-assigned-info__previous">
+                <p class="__ssv__inst-assignedstaff__previous">Staff ID: <span></span></p>
+                <p class="__ssv__inst-assignedusername__previous">Staff username: <span></span></p>
+              </div>
+              <p class="__ssv__inst-decision__previous">Decision: <span></span></p>
+              <div class="__ssv__inst-decision-info__previous">
+                <p class="__ssv__inst-decisiondate__previous">Made on date: <span></span></p>
+              </div>
+              <p class="__ssv__inst-notes-reason__previous">Reason: <span></span></p>
+            </div>
+          </div>
+        </div>
+        
+      </li>
+    </ul>
+  </div>
+  
+  <div id="__ssv-sitelist__assigned" class="__ssv-site_constructor">
+    <h1>Assigned to me</h1>
+    <ul>
+      <li class="__ssv_sitelist__assigned_dummy">
+        
+        
+        <div class="__ssv-siteinstance_main">
+          <div class="__ssv-siteinstance_main__left">
+            <h2>This submission</h2>
+            <!--
+            - site url
+            - assigned status
+              - staff
+              - staff username
+            - decision
+              - decision date
+            -->
+            <p class="__ssv__inst-siteurl">URL: <a href="#" title="" target="_blank" rel="noopener noreferrer"></a></p>
+            <p class="__ssv__inst-assigned">Assigned: <span></span></p>
+            <div class="__ssv__inst-assigned-info">
+              <p class="__ssv__inst-assignedstaff">Staff ID: <span></span></p>
+              <p class="__ssv__inst-assignedusername">Staff username: <span></span></p>
+            </div>
+            <p class="__ssv__inst-decision">Decision: <span></span></p>
+            <div class="__ssv__inst-decision-info">
+              <p class="__ssv__inst-decisiondate">Made on date: <span></span></p>
+            </div>
+            <p style="font-weight:bold;margin-top:35px;">Site information from onboarding form</p>
+            <p class="__ssv__inst-sitename">Site name: <span></span></p> <!-- Site name -->
+            <p class="__ssv__inst-sitedesc">Site description: <span></span></p> <!-- Site description -->
+            <p class="__ssv__inst-sitetag">Site tag: <span></span></p> <!-- Site tag -->
+            <p class="__ssv__inst-isverified">Is verified: <span></span></p>
+            <div class="__ssv__inst-sitelogo">                 <!-- Site logo -->
+              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Site logo">
+              <p></p>
+            </div>
+            <button class="__ssv__inst__takeaction">Make decision</button>
+          </div>
+          <div style="width:50%;">
+            <div class="__ssv-siteinstance_main__right __ssv-siteinstance_main__right__0">
+              <h2>Previous submissions</h2>
+              <!--
+              - prior vetting objects
+              -->
+              <div class="__ssv_sitelist__previous_dummy">
+                <p class="__ssv__inst-siteurl__previous">URL: <span></span></p>
+                <div class="__ssv__inst-assigned-info__previous">
+                  <p class="__ssv__inst-assignedstaff__previous">Staff ID: <span></span></p>
+                  <p class="__ssv__inst-assignedusername__previous">Staff username: <span></span></p>
+                </div>
+                <p class="__ssv__inst-decision__previous">Decision: <span></span></p>
+                <div class="__ssv__inst-decision-info__previous">
+                  <p class="__ssv__inst-decisiondate__previous">Made on date: <span></span></p>
+                </div>
+                <p class="__ssv__inst-notes-reason__previous">Reason: <span></span></p>
+              </div>
+            </div>
+            <div class="__ssv-siteinstance_main__right __ssv-siteinstance_main__right__1">
+              <h2>Prior failed audits</h2>
+              
+              <div class="__ssv_sitelist__prioraudit_dummy">
+                <p class="__ssv__inst-siteurl__prioraudit">URL: <span></span></p>
+                <div class="__ssv__inst-assigned-info__prioraudit">
+                  <p class="__ssv__inst-assignedstaff__prioraudit">Staff ID: <span></span></p>
+                  <p class="__ssv__inst-assignedusername__prioraudit">Staff username: <span></span></p>
+                </div>
+                <p class="__ssv__inst-decisiondate__prioraudit">Made on date: <span></span></p>
+                <p class="__ssv__inst-notes-reason__prioraudit">Reason: <span></span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="__ssv-siteinstance_expanded">
+          <!--
+            - APIVoid scan action
+          
+            email action
+            - checklist of approval
+            - email form (notes to the publisher)
+            
+            the email notes form is readonly until the Staff
+            selects "add comments", at which point "Staff comments" will be
+            appended to the email body below the checklist content, and the
+            notes will no longer be readonly
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <li>- Fast and friendly UI/UX</li>
+            <li>- Accessibility</li>
+            
+            <li>- Mobile friendly design</li>
+            <li>- Compatibility with Chrome and Firefox</li>
+          -->
+          <p>DONT's</p>
+          <input type="checkbox" style="width:auto" class="__ssv__d0">
+          <label>Excessive advertising</label><br>
+          <input type="checkbox" style="width:auto" class="__ssv__d1">
+          <label>Informational / local business sites</label><br>
+          <input type="checkbox" style="width:auto" class="__ssv__d2">
+          <label>Providing inaccurate site information</label><br>
+          <input type="checkbox" style="width:auto" class="__ssv__d3">
+          <label>Malware and other malicious content</label><br>
+          <input type="checkbox" style="width:auto" class="__ssv__d4">
+          <label>Illegal or violent content</label><br>
+          <input type="checkbox" style="width:auto" class="__ssv__d5">
+          <label>Sexual assault or exploitation</label><br>
+          <input type="checkbox" style="width:auto" class="__ssv__d6">
+          <label>Sexual or suggestive content involving minors</label><br>
+          <input type="checkbox" style="width:auto" class="__ssv__d7">
+          <label>Hate speech, threats, harassment, or bullying</label><br>
+          <input type="checkbox" style="width:auto" class="__ssv__d8">
+          <label>Exposing personal or confidential information</label><br>
+          <input type="checkbox" style="width:auto" class="__ssv__d9">
+          <label>Excessively obscene content</label><br>
+          <input type="checkbox" style="width:auto" class="__ssv__d10">
+          <label>Multi-level marketing companies, scams, or other deceitful content</label><br>
+          <input type="checkbox" style="width:auto" class="__ssv__d11">
+          <label>Intellectual property violations</label><br>
+          <input type="checkbox" style="width:auto" class="__ssv__d12">
+          <label>Anything against our Terms of Publishing</label><br>
+          
+          <p>DO's</p>
+          <input type="checkbox" checked style="width:auto" class="__ssv__d13">
+          <label>Original and engaging content</label><br>
+          <input type="checkbox" checked style="width:auto" class="__ssv__d14">
+          <label>Has an English translation</label><br>
+          <input type="checkbox" checked style="width:auto" class="__ssv__d15">
+          <label>Mobile friendly design</label><br>
+          <input type="checkbox" checked style="width:auto" class="__ssv__d16">
+          <label>Lighthouse audit (accessibility >= 50)</label><br>
+          <input type="checkbox" checked style="width:auto" class="__ssv__d17">
+          <label>Lighthouse audit (best practices >= 50)</label><br>
+          <input type="checkbox" checked style="width:auto" class="__ssv__d18">
+          <label>Compatibility with Chrome and Firefox</label><br>
+          <div style="margin-top:15px;border: 1px solid orangered;padding: 15px;width: auto;margin-right: 35px;">
+            <button class="__ssv__apivoid_scan">Run APIVoid</button>
+            <h4>Domain Reputation</h4>
+            <p class="__ssv__apivoid_0">Engine count: <span></span></p>
+            <p class="__ssv__apivoid_1">Detections: <span></span></p>
+            <p class="__ssv__apivoid_2">Detection Rate: <span></span></p>
+            <p>Engine summary</p>
+            <textarea class="__ssv__apivoid_3">Engines that detect show up here</textarea>
+            <h4>Site Trustworthiness</h4>
+            <p class="__ssv__apivoid_4">Trust Score: <span></span></p>
+            <input type="checkbox" checked style="width:auto" class="__ssv__d19">
+            <label>Passes APIVoid audit</label><br>
+          </div>
+          
+          <textarea readonly class="__ssv_denial_notes" placeholder="Reasons for denial listed here from checklist above (if site is being denied). This is added to the email sent to publisher." style="margin-top: 35px; width:600px; height:250px;"></textarea><br>
+
+          <button class="__ssv__approve_site">APPROVE</button>
+          <button class="__ssv__deny_site">DENY</button>
+          <button class="__ssv__requestopinion_site">REQUEST OPINION</button>
+          <button class="__ssv__inst__chickenout">Return</button>
+        </div>
+        
+      </li>
+    </ul>
+  </div>
+  
+</div>
+
+{% endblock %}
+
+{% block jsfiles %}
+<script src="{% static 'js/staff-vettings.js' %}"></script>
+{% endblock %}

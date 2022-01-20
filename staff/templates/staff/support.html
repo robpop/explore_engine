@@ -1,0 +1,70 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Unsift - Support{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/staff.css' %}">
+<link rel="stylesheet" href="{% static 'css/support.css' %}">
+<link rel="stylesheet" href="{% static 'css/staff-main.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div id="__ssb">
+  <ul>
+    <li><a href="{% url 'staff:home' %}" title="Platform metrics">Platform metrics</a></li>
+    <li class="selected"><a href="{% url 'staff:support' %}" title="Support tickets">Support tickets</a></li>
+    <li><a href="{% url 'staff:vettings' %}" title="Vettings">Vettings</a></li>
+    <li><a href="{% url 'staff:audits' %}" title="Audits">Audits</a></li>
+    <li><a href="{% url 'staff:changes' %}" title="Audits">Site changes</a></li>
+  </ul>
+</div>
+<div id="__sse" class="__ss" style="height:calc(100% - 290px)">
+  <table>
+    <tr class="__sse_headers">
+      <th>Created</th>
+      <th>Subject</th>
+      <th>Message</th>
+      <th>Status</th>
+      <th>Delete</th>
+    </tr>
+    <tr class="__sse-dummy">
+      <td class="__sse_created __sse_field"></td>
+      <td class="__sse_subject __sse_field"></td>
+      <td class="__sse_message __sse_field"></td>
+      <td class="__sse_status __sse_field"></td>
+      <td><button class="__sse_delete">Delete</button></td>
+    </tr>
+  </table>
+</div>
+
+<div id="support-delete-ticket_auth">
+  <p>Send a ticket to the trash can</p>
+  <input type="password" placeholder="password">
+  <input type="number" placeholder="2fa code">
+</div>
+
+<div id="support-dialog-backdrop" class="animated faster fadeIn"></div>
+<div id="support-commentlog" class="animated faster fadeInUp">
+  <ul id="support-commentlog-message_wrapper">
+    <li class="support-comment-item-dummy animated faster bounceIn">
+      <p></p>
+      <span></span>
+    </li>
+  </ul>
+  <div id="support-commentlog-send_wrapper">
+    <textarea maxlength="1024" id="support-commentlog-send_message" placeholder="Message Unsift staff..." ></textarea>
+    <div id="support-commentlog-options_wrapper">
+      <button type="button" class="l--a-f-f_disable">Send</button>
+      <button type="button">Cancel</button>
+    </div>
+  </div>
+  <button type="button" id="support-commentlog-closed_close">Close</button>
+</div>
+
+{% endblock %}
+
+{% block jsfiles %}
+<script src="{% static 'js/staff-support.js' %}"></script>
+{% endblock %}

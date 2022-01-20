@@ -1,0 +1,95 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Unsift - Staff Home{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/staff.css' %}">
+<link rel="stylesheet" href="{% static 'css/staff-main.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div id="__ssb">
+  <ul>
+    <li><a href="{% url 'staff:home' %}" title="Platform metrics">Platform metrics</a></li>
+    <li><a href="{% url 'staff:support' %}" title="Support tickets">Support tickets</a></li>
+    <li><a href="{% url 'staff:vettings' %}" title="Vettings">Vettings</a></li>
+    <li><a href="{% url 'staff:audits' %}" title="Audits">Audits</a></li>
+    <li class="selected"><a href="{% url 'staff:changes' %}" title="Audits">Site changes</a></li>
+  </ul>
+</div>
+<div id="__ssg" class="__ss" style="margin-left: 35px;">
+  <p style="font-family:'Oxygen-Bold';font-size:18px;">Changes highlighted in blue</p>
+  <ul id="__ssg_sitelist">
+    <li class="__ssg_sitelist_dummy">
+    
+      <div class="__ssv-siteinstance_main">
+        <div class="__ssv-siteinstance_main__left">
+          <h2>This change</h2>
+          <p class="__ssv__inst-siteurl">URL: <span></span></p>
+          <p class="__ssv__inst-lastsubmitted">Last modified: <span></span></p>
+          <p class="__ssv__inst-newdesc" style="word-break:break-word;">New description: <span></span></p>
+          <p class="__ssv__inst-newname">New name: <span></span></p>
+          <p class="__ssv__inst-newlogo">New logo: <span></span><br /><span></span><br /><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="New logo" style="width:126px;height:auto;"></p>
+          <button class="__ssv__inst__takeaction">Make decision</button>
+        </div>
+        <div class="__ssv-siteinstance_main__right">
+          <h2>Previous data</h2>
+          <p class="__ssv__inst-previous_newdesc">Old description: <span></span></p>
+          <p class="__ssv__inst-previous_newname">Old name: <span></span></p>
+          <p class="__ssv__inst-previous_newlogo">Old logo: <br /><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="New logo" style="width:126px;height:auto;"><span></span></p>
+        </div>
+      </div>
+      
+      <div class="__ssv-siteinstance_expanded">
+        <!--
+          - APIVoid scan action
+        
+          email action
+          - checklist of approval
+          - email form (notes to the publisher)
+          
+          the email notes form is readonly until the Staff
+          selects "add comments", at which point "Staff comments" will be
+          appended to the email body below the checklist content, and the
+          notes will no longer be readonly
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li>- Fast and friendly UI/UX</li>
+          <li>- Accessibility</li>
+          
+          <li>- Mobile friendly design</li>
+          <li>- Compatibility with Chrome and Firefox</li>
+        -->
+        <p>DONT's</p>
+        <input type="checkbox" style="width:auto" class="__ssv__d2">
+        <label>Providing inaccurate site information</label><br>
+        
+        <input type="checkbox" style="width:auto" class="__ssv__d12">
+        <label>Anything against our Terms of Publishing</label><br>
+        
+        
+        <textarea readonly class="__ssv_denial_notes" placeholder="Reasons for denial listed here from checklist above (if change is being denied). This is added to the email sent to publisher." style="margin-top: 35px; width:600px; height:250px;"></textarea><br>
+
+        <button class="__ssv__approve_site">APPROVE</button>
+        <button class="__ssv__deny_site">DENY</button>
+        <button class="__ssv__inst__chickenout">Return</button>
+      </div>
+    
+    </li>
+  </ul>
+</div>
+
+{% endblock %}
+
+{% block jsfiles %}
+<script src="{% static 'js/staff-changes.js' %}"></script>
+{% endblock %}

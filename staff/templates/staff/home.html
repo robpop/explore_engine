@@ -1,0 +1,53 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Unsift - Staff Home{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/staff.css' %}">
+<link rel="stylesheet" href="{% static 'css/staff-main.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div id="__ssb">
+  <ul>
+    <li class="selected"><a href="{% url 'staff:home' %}" title="Platform metrics">Platform metrics</a></li>
+    <li><a href="{% url 'staff:support' %}" title="Support tickets">Support tickets</a></li>
+    <li><a href="{% url 'staff:vettings' %}" title="Vettings">Vettings</a></li>
+    <li><a href="{% url 'staff:audits' %}" title="Audits">Audits</a></li>
+    <li><a href="{% url 'staff:changes' %}" title="Audits">Site changes</a></li>
+  </ul>
+</div>
+<div id="__ssc" class="__ss" style="margin-left: 35px;">
+  <p style="margin-left:0!important">Shows, clicks, views, and saves are from yesterday</p>
+  <p style="margin-left:0!important">Average metrics are across all sites</p>
+  <hr>
+  <div id="__gmc">
+    <ul id="__gmc_0">
+      <li>Average showings: <span></span></li>
+      <li>Average views: <span></span></li>
+      <li>Average clicks: <span></span></li>
+      <li>Average saves: <span></span></li>
+    </ul>
+    <ul id="__gmc_1">
+      <li>Top site showings: <span></span></li>
+      <li>Worst site showings: <span></span></li>
+    </ul>
+    <ul id="__gmc_2">
+      <li>Number of free sites: <span></span></li>
+      <li>Number of paid sites: <span></span></li>
+      <li>Total sites: <span></span></li>
+      <li>Sites awaiting approval: <span></span></li>
+      <li>Free sites added past week: <span></span></li>
+      <li>Paid sites added past week: <span></span></li>
+      <li>Estimated gross revenue next month: <span></span></li>
+    </ul>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block jsfiles %}
+<script src="{% static 'js/staff-home.js' %}"></script>
+{% endblock %}
