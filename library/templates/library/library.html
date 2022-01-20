@@ -1,0 +1,282 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Library - Unsift{% endblock %}
+
+{% block cssfiles %}
+<link rel="stylesheet" href="{% static 'css/library.css' %}">
+{% endblock %}
+
+{% block content %}
+
+  <!--
+
+  TO DO:
+
+  1. make the API request for the sites
+  2. fill both the desktop and mobile versions with the appropriate information
+  3. fix mobile bugs
+  4. test
+
+  -->
+
+
+  <div class="-non-mobile">
+    <h1 id="library-dashboard--header">Your Library</h1>
+    <h2 id="library-dashboard--subheader-folders">Folders</h2>
+    <div id="library-items" class="animated fasterer">
+      <!-- main explore region -->
+      <div id="library-items--folders">
+        <div id="library-item--add_new_folder" class="library-items--custom-folder">
+          <svg viewBox="0 0 24 24">
+              <path fill="#EDF2FA" stroke="#3C6CC4" stroke-width="0.25" d="M10,4L12,6H20A2,2 0 0,1 22,8V18A2,2 0 0,1 20,20H4C2.89,20 2,19.1 2,18V6C2,4.89 2.89,4 4,4H10M15,9V12H12V14H15V17H17V14H20V12H17V9H15Z" />
+          </svg>
+          <p>Add a new folder</p>
+        </div>
+        <!-- Remove hard coded link from JS and make this card an anchor tag -->
+        <div class="library-items--custom-folder library-items--custom-folder_dummy animated zoomIn fasterer">
+          <a href="#" title=""></a>
+          <svg viewBox="0 0 24 24" class="library-items--folders-ficon0">
+              <path fill="#EDF2FA" stroke="#3C6CC4" stroke-width="0.25" d="M10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6H12L10,4Z" />
+          </svg>
+          <p></p>
+        </div>
+      </div>
+      <h2 id="library-dashboard--subheader-sites">Library Dashboard</h2>
+      <hr style="margin-top:55px"/>
+      <div id="library-site-editor-bar">
+
+        <button type="button" class="library-edit-sites-btn animated fadeIn fasterer" id="lib_edit_bar_0">
+          Edit
+        </button>
+
+        <button type="button" class="library-edit-sites-btn animated fadeIn fasterer" id="lib_edit_bar_1">
+          Cancel
+        </button>
+
+        <button type="button" class="library-edit-sites-btn lesbtn_dih animated fadeIn fasterer" id="lib_edit_bar_2">
+          Move
+        </button>
+
+        <button type="button" class="library-edit-sites-btn lesbtn_dih animated fadeIn fasterer" id="lib_edit_bar_3">
+          Delete
+        </button>
+
+        <button type="button" class="library-edit-sites-slctall animated fadeIn fasterer" id="lib_edit_bar_4">
+          <span>
+            <svg viewBox="0 0 24 24">
+              <path fill="#fff" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" />
+            </svg>
+          </span>
+          All
+        </button>
+
+      </div>
+
+      <p class="library--empty-folder" class="animated fadeIn faster">Your dashboard is empty</p>
+      <div id="library-items--sites">
+        <div class="library-section-dummy library-section libextpos lditm explore-listing-section lazy -non-mobile" data-loader="sitecard_loader">
+          <div id="explore-primary-container" class="explore-atlib explore-primary-container animated">
+            <div class="library-edit-sel-indicator animated fasterer fadeIn">
+              <svg viewBox="0 0 24 24">
+                  <path fill="#fff" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" />
+              </svg>
+            </div>
+            <div class="library-folder">
+              <div class="library-folder-preview">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="128" height="128" class="lazy" data-src="" alt="Site logo" />
+              </div>
+            </div>
+            <p class="library-folder-name"></p>
+          </div>
+          <div class="explore-expanded-info animated fadeInUp faster explore-atlib">
+            <p class="explore-expanded-info-desc"></p>
+            <a class="ripple exp_crd_clk explore-site--open" title="" href="" target="_blank" rel="noopener noreferrer">Open</a>
+            <div class="library-site-feedback">
+              <button class="library-site-feedback-btn exp_crd_clk">Give Feedback</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="explore-user-feedback-series animated">
+      <h2 class="animated">Tell <span id="explore-inst-feedback-name"></span> what you think</h2>
+      <!--<p class="animated" id="explore-user-feedback-chrlim">X/Y characters</p>-->
+      <div id="explore-user-feedback-subjectrating">
+        <input id="eufsr-subject" class="exp_crd_clk animated" placeholder="Subject (4-50 characters)" type="text" required minlength="4" maxlength="50">
+        <div id="eufsr-wrap" class="exp_crd_clk">
+          <div>&#9734;</div><div>&#9734;</div><div>&#9734;</div><div>&#9734;</div><div>&#9734;</div>
+        </div>
+      </div>
+      <textarea id="eufsr-prose" class="exp_crd_clk animated" placeholder="Your feedback (8-250 characters)" required minlength="8" maxlength="250"></textarea>
+      <div class="explore-user-feedback-options animated">
+        <button id="eufsr-submit" class="exp_crd_clk ripple l--a-f-f_disable">Send</button>
+        <button id="eufsr-cancel" class="exp_crd_clk ripple">Cancel</button>
+      </div>
+    </div>
+    
+
+    <div id="library--add-folder-form" class="animated faster fadeInDown">
+      <input type="text" placeholder="Folder Name" maxlength="25">
+      <div id="library-add--optbtn-array">
+        <button type="button" class="library-add--optbtn_crt ripple l--a-f-f_disable">Create Folder</button>
+        <button type="button" class="library-add--optbtn_cnl ripple">Cancel</button>
+      </div>
+    </div>
+
+    <div id="library--delete-site-form" class="animated faster fadeInDown">
+      <p>Remove the selected sites from your library?</p>
+      <div id="library-del--optbtn-array">
+        <button type="button" class="library-del--optbtn_crt ripple">Remove Sites</button>
+        <button type="button" class="library-del--optbtn_cnl ripple">Cancel</button>
+      </div>
+    </div>
+
+    <div id="library--move-site-form" class="animated faster fadeInDown">
+      <p>Your Library</p>
+      <p id="lmsf__subheader">Select a folder below</p>
+      <div class="lmsf-lof">
+        <ul>
+          <li class="exp-user-lib-folder__dummy" data-fid=""></li>
+        </ul>
+      </div>
+      <div id="library-mov--optbtn-array">
+        <button type="button" class="ripple library-mov--optbtn_mvsites l--a-f-f_disable">Move Sites</button>
+        <button type="button" class="library-mov--optbtn_cnl ripple">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+
+  <div id="library-form-all-packets_mobile" class="-mobile">
+    <div class="animated fasterer -mobile mlsfepev" id="mobile-library-section-focus">
+      <button class="ripple mobile-library-exp-cls animated fasterer">
+        <svg viewBox="0 0 24 24">
+            <path fill="#fff" d="M14,20H10V11L6.5,14.5L4.08,12.08L12,4.16L19.92,12.08L17.5,14.5L14,11V20Z" />
+        </svg>
+      </button>
+      <div class="mobile-library-exp-info animated fasterer">
+        <!-- expanded info goes here -->
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Site logo">
+        <p class="mobile-library-sitename"></p>
+        <p class="mobile-library-sitedesc"></p>
+        <div class="mobile-library-exp-info-btn-series">
+          <a class="ripple exp_crd_clk explore-site--open__mobile" title="Open site" href="#" target="_blank" rel="noopener noreferrer">Open</a>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="mobile-library-site-feedback">
+          <button id="mobile-card-feedback_btn" class="exp_crd_clk ripple">Give Feedback</button>
+        </div>
+        {% endif %}
+        <div class="mobile-securelink-display"></div>
+      </div>
+      <div class="mobile-card-givefeedback animated fasterer">
+        <h2>null</h2>
+        <input id="mobile-card-feedbacksubject" placeholder="Subject (4-50 characters)" type="text" required="" minlength="4" maxlength="50">
+        <div class="mobile-card-rating_wrapper">
+          <div>&#9734;</div><div>&#9734;</div><div>&#9734;</div><div>&#9734;</div><div>&#9734;</div>
+        </div>
+        <textarea id="mobile-card-feedbackcontent" placeholder="Your feedback (8-250 characters)" required="" minlength="8" maxlength="250"></textarea>
+        <div class="mobile-card-optbtn_wrapper">
+          <button id="mobile-card-givefeedback_send" type="button" class="ripple l--a-f-f_disable">Send</button>
+          <button type="button" id="mobile-card-givefeedback_cancel" class="ripple">Cancel</button>
+        </div>
+      </div>
+    </div>
+    
+    <p class="library--empty-folder" class="animated fadeIn faster">Your dashboard is empty</p>
+    <div class="mobile-library-section mobile-library-section-dummy -mobile">
+      <div class="mobile-library-preview">
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="lazy" data-src="" alt="Site logo">
+      </div>
+      <div class="mobile-library-info">
+        <p></p>
+      </div>
+      <p class="mmeta mmeta__title"></p>
+      <p class="mmeta mmeta__desc"></p>
+      <p class="mmeta mmeta__link"></p>
+      <div class="mmeta mmeta__securelink">
+        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12,17C10.89,17 10,16.1 10,15C10,13.89 10.89,13 12,13A2,2 0 0,1 14,15A2,2 0 0,1 12,17M18,20V10H6V20H18M18,8A2,2 0 0,1 20,10V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V10C4,8.89 4.89,8 6,8H7V6A5,5 0 0,1 12,1A5,5 0 0,1 17,6V8H18M12,3A3,3 0 0,0 9,6V8H15V6A3,3 0 0,0 12,3Z" />
+        </svg>
+        <p></p>
+      </div>
+      <p class="mmeta mmeta__link_title"></p>
+    </div>
+  </div>
+
+  <span id="i_ed__p"></span>
+  
+  <div id="mobile-library-edit-fab" class="-mobile">
+    <button class="animated fasterer fadeInUp ripple l--a-f-f_disable">
+      <svg viewBox="0 0 24 24">
+          <path fill="#fff" d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />
+      </svg>
+    </button>
+    <button class="animated fasterer fadeInUp ripple l--a-f-f_disable">
+      <svg viewBox="0 0 24 24">
+          <path fill="#fff" d="M14,18V15H10V11H14V8L19,13M20,6H12L10,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V8C22,6.89 21.1,6 20,6Z" />
+      </svg>
+    </button>
+    <button class="animated fasterer fadeIn ripple">
+      <svg viewBox="0 0 24 24">
+          <path fill="#fff" d="M15.9,18.45C17.25,18.45 18.35,17.35 18.35,16C18.35,14.65 17.25,13.55 15.9,13.55C14.54,13.55 13.45,14.65 13.45,16C13.45,17.35 14.54,18.45 15.9,18.45M21.1,16.68L22.58,17.84C22.71,17.95 22.75,18.13 22.66,18.29L21.26,20.71C21.17,20.86 21,20.92 20.83,20.86L19.09,20.16C18.73,20.44 18.33,20.67 17.91,20.85L17.64,22.7C17.62,22.87 17.47,23 17.3,23H14.5C14.32,23 14.18,22.87 14.15,22.7L13.89,20.85C13.46,20.67 13.07,20.44 12.71,20.16L10.96,20.86C10.81,20.92 10.62,20.86 10.54,20.71L9.14,18.29C9.05,18.13 9.09,17.95 9.22,17.84L10.7,16.68L10.65,16L10.7,15.31L9.22,14.16C9.09,14.05 9.05,13.86 9.14,13.71L10.54,11.29C10.62,11.13 10.81,11.07 10.96,11.13L12.71,11.84C13.07,11.56 13.46,11.32 13.89,11.15L14.15,9.29C14.18,9.13 14.32,9 14.5,9H17.3C17.47,9 17.62,9.13 17.64,9.29L17.91,11.15C18.33,11.32 18.73,11.56 19.09,11.84L20.83,11.13C21,11.07 21.17,11.13 21.26,11.29L22.66,13.71C22.75,13.86 22.71,14.05 22.58,14.16L21.1,15.31L21.15,16L21.1,16.68M6.69,8.07C7.56,8.07 8.26,7.37 8.26,6.5C8.26,5.63 7.56,4.92 6.69,4.92A1.58,1.58 0 0,0 5.11,6.5C5.11,7.37 5.82,8.07 6.69,8.07M10.03,6.94L11,7.68C11.07,7.75 11.09,7.87 11.03,7.97L10.13,9.53C10.08,9.63 9.96,9.67 9.86,9.63L8.74,9.18L8,9.62L7.81,10.81C7.79,10.92 7.7,11 7.59,11H5.79C5.67,11 5.58,10.92 5.56,10.81L5.4,9.62L4.64,9.18L3.5,9.63C3.41,9.67 3.3,9.63 3.24,9.53L2.34,7.97C2.28,7.87 2.31,7.75 2.39,7.68L3.34,6.94L3.31,6.5L3.34,6.06L2.39,5.32C2.31,5.25 2.28,5.13 2.34,5.03L3.24,3.47C3.3,3.37 3.41,3.33 3.5,3.37L4.63,3.82L5.4,3.38L5.56,2.19C5.58,2.08 5.67,2 5.79,2H7.59C7.7,2 7.79,2.08 7.81,2.19L8,3.38L8.74,3.82L9.86,3.37C9.96,3.33 10.08,3.37 10.13,3.47L11.03,5.03C11.09,5.13 11.07,5.25 11,5.32L10.03,6.06L10.06,6.5L10.03,6.94Z" />
+      </svg>
+      <svg viewBox="0 0 24 24" class="mlib_hidden">
+          <path fill="#fff" d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+      </svg>
+    </button>
+    <button class="ripple mobile-library-close-dialog animated fasterer">
+      <svg viewBox="0 0 24 24">
+          <path fill="#fff" d="M14,20H10V11L6.5,14.5L4.08,12.08L12,4.16L19.92,12.08L17.5,14.5L14,11V20Z" />
+      </svg>
+    </button>
+  </div>
+  
+  <div id="mobile-library_editing_dialog" class="animated fasterer fadeIn -mobile">
+    <div id="mobile-library_editing_dialog__wrapper">
+      <p></p>
+      <p></p>
+      <div class="mled__delete">
+        <button type="button" class="mobile_library-del--optbtn_crt ripple">Remove</button>
+        <button type="button" class="mobile_library-del--optbtn_cnl ripple">Cancel</button>
+      </div>
+      <div class="mled__move">
+        <div class="m__lmsf-lof">
+          <ul>
+            <li class="m__exp-user-lib-folder__dummy" data-fid=""></li>
+          </ul>
+        </div>
+        <div class="mobile-card-optbtn_wrapper">
+          <button type="button" class="mobile_library-mov--optbtn_crt ripple l--a-f-f_disable">Move</button>
+          <button type="button" class="mobile_library-mov--optbtn_cnl ripple">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="mobile-library_newfolder_dialog" class="animated fasterer fadeIn -mobile">
+    <div>
+      <p>Create a new folder</p>
+      <input id="mobile_library-newf--optinp" type="text" placeholder="Folder Name" maxlength="25">
+      <div id="mobile-library__newfolder-btn_wrap">
+        <button type="button" class="mobile_library-newf--optbtn_crt ripple l--a-f-f_disable">Create</button>
+        <button type="button" class="mobile_library-newf--optbtn_cnl ripple">Cancel</button>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block jsfiles %}
+    <script src="{% static 'js/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/svg.js' %}"></script>
+    <script src="{% static 'js/dynamic-logo.js' %}"></script>
+    <script src="{% static 'js/toggle-nav-visibility.js' %}"></script>
+    <script src="{% static 'js/api-library.js' %}"></script>
+    <script src="{% static 'js/library-fab.js' %}"></script>
+    <script src="{% static 'js/mobile-library.js' %}"></script>
+{% endblock %}
